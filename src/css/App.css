@@ -1,0 +1,192 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #F5F5F5;
+}
+
+.container {
+  max-width: 1220px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* HEADER */
+.home__header {
+  background-image: url(../img/header.jpeg);
+  display: block;
+  height: 600px;
+  width: 100%;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.navigation__list {
+  width: 700px;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.navigation--item {
+  color: #0b0a0a;
+  font-weight: 500;
+  transition: all 0.3s ease-in;
+
+}
+
+.navigation--item:hover {
+  transition: all 0.3s ease-in;
+}
+
+.home__header--text {
+  max-width: 550px;
+  padding: 50px 0;
+}
+
+.home__header--text h1{
+  font-weight: 700;
+  font-size: 100px;
+  color: #FFFFFF;
+}
+
+.home__header--text p{
+  padding-top: 50px;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 38px;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.arrow--btn {
+  display: flex;
+  align-items: center;
+  padding-top: 110px;
+  column-gap: 10px;
+}
+
+
+.arrow--btn a{
+  color: #FFFFFF;
+}
+
+.arrow--btn:hover {
+  color: #0b0a0a;
+}
+
+.arrow--btn svg{
+  fill: #FFFFFF;
+}
+
+/* CATEGORIES */
+
+.home__categories--row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 60px;
+}
+
+.home__categories--card {
+  background-image: url('../img/card.jpg');
+  width: 350px;
+  height: 400px;
+  text-align: center;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.home__categories--card p{
+padding: 30px;
+}
+
+.home__categories h2 {
+  font-weight: 700;
+  font-size: 30px;
+  padding-top: 100px;
+}
+
+/* ABOUT */
+.home__about {
+  padding: 120px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home__about--section-name {
+  margin-bottom: 107px;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.home__about--title {
+  max-width: 350px;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 73px;
+}
+
+.home__about--text {
+  max-width: 600px;
+}
+
+.home__about--discription {
+  padding-top: 30px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: #8B8B8B;
+}
+
+.home__about--text .arrow--btn a{
+  color: #0b0a0a;
+}
+
+.home__about--text .arrow--btn svg{
+  fill: #0b0a0a;
+}
+
+/* LOGIN */
+
+.login__page {
+  background-image: url(../img/login.jpeg);
+  display: block;
+  height: 100vh;
+  width: 100%;
+}
+
+.login__container {
+  display: flex;
+  justify-content: center;
+}
+
+.login__card {
+  width: 400px;
+  height: 300px;
+  margin-top: 100px;
+  padding: 50px;
+  background: rgba(29, 30, 29, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #FFFFFF;
+}
+
+.login__title {
+  font-weight: 700;
+  font-size: 40px;
+  text-align: center;
+}
+
+.login__form {
+  padding: 50px 0;
+}
+
+.input-element {
+  padding: 20px 0;
+}
