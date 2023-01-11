@@ -3,10 +3,10 @@ import Navigation from "../navigation";
 
 const Contact = () => {
     return (
-    <>
+    <div className="container">
         <Navigation/>
-        <h1>Contact page</h1>
-    </>
+        <h1>contact page</h1>
+    </div>
     );
 };
 

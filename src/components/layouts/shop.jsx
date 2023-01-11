@@ -1,5 +1,6 @@
 import React from "react";
 import Navigation from "../navigation";
+import ShopPage from "../pages/shopPage/shopPage";
 
 const Shop = () => {
     return (
@@ -7,8 +8,9 @@ const Shop = () => {
     <header>
         <div className="container">
             <Navigation/>
-            <h1>Lorem ipsum dolor sit amet</h1>
-            <p>Praesentium facere quo consequatur laudantium, omnis mollitia eaque.</p>
+            <h1 className="shop__title">Lorem ipsum dolor sit amet</h1>
+            <p className="shop__subtitle">Praesentium facere quo consequatur laudantium, omnis mollitia eaque.</p>
+            <ShopPage />
         </div>
     </header>
     <main>
