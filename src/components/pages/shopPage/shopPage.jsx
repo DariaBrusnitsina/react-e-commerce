@@ -5,16 +5,17 @@ import _ from "lodash";
 import ItemsList from "../../itemsList";
 import Pagination from "../../pagination";
 import CategoriesList from "../../categoriesList";
+import SortButton from "../../sortButton";
 
 const ShopPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [categories, setCategories] = useState();
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCategory, setSelectedCategory] = useState();
-    const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
-    const pageSize = 8;
-
+    const [sortBy, setSortBy] = useState("asc");
+    const pageSize = 6;
     const [items, setItems] = useState();
+
     useEffect(() => {
         api.items.fetchAll().then((data) => setItems(data));
     }, []);
@@ -47,25 +48,26 @@ const ShopPage = () => {
     if (items) {
         const filteredItems = searchQuery
             ? items.filter(
-                (user) =>
-                    user.name
+                (item) =>
+                    item.name
                         .toLowerCase()
                         .indexOf(searchQuery.toLowerCase()) !== -1
             )
             : selectedCategory
                 ? items.filter(
                     (item) =>
-                        JSON.stringify(item.profession) ===
-                        JSON.stringify(selectedCategory)
+                        JSON.stringify(item.category.name) ===
+                        JSON.stringify(selectedCategory.name)
                 )
                 : items;
 
         const count = filteredItems.length;
         const sortedUsers = _.orderBy(
             filteredItems,
-            [sortBy.path],
-            [sortBy.order]
+            ['price'],
+            sortBy
         );
+
         const usersCrop = paginate(sortedUsers, currentPage, pageSize);
         const clearFilter = () => {
             setSelectedCategory();
@@ -94,19 +96,18 @@ const ShopPage = () => {
                 <div className="shop__items">
                     <div className="shop__items--bar">
                         <input
+                            className="search-input"
                             type="text"
                             name="searchQuery"
                             placeholder="Search..."
                             onChange={handleSearchQuery}
                             value={searchQuery}
                         />
-                        <button>Price</button>
+                        <SortButton onSort={handleSort} selectedSort={sortBy}/>
                     </div>
                     {count > 0 && (
                         <ItemsList
-                            items={items}
-                            onSort={handleSort}
-                            selectedSort={sortBy}
+                            items={usersCrop}
                         />
                     )}
                     <div className="d-flex justify-content-center">
