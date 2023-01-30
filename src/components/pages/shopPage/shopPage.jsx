@@ -7,7 +7,7 @@ import Pagination from "../../pagination";
 import CategoriesList from "../../categoriesList";
 import SortButton from "../../sortButton";
 
-const ShopPage = () => {
+const ShopPage = ({onChangeCart}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [categories, setCategories] = useState();
     const [searchQuery, setSearchQuery] = useState("");
@@ -107,7 +107,7 @@ const ShopPage = () => {
                     </div>
                     {count > 0 && (
                         <ItemsList
-                            items={usersCrop}
+                            items={usersCrop} onChangeCart={onChangeCart}
                         />
                     )}
                     <div className="d-flex justify-content-center">

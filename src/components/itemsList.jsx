@@ -1,18 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ItemsList = ( {items}) => {
+const ItemsList = ( {items, onChangeCart}) => {
+
+    const handleAddItem = (data) => {
+        const local = localStorage.getItem("cart")
+
+        if (local) {
+            const cartSet = JSON.parse(local)
+            cartSet.push(data)
+            localStorage.setItem("cart", JSON.stringify(cartSet))
+
+        } else {
+            let local = []
+            local.push(data)
+            localStorage.setItem("cart", JSON.stringify(local))
+        }
+        onChangeCart()
+    }
+
     return (
     <div className="shop__items--list">
          {items.map((item) => (
                     <div className="shop__item">
-                        <Link key={item._id} to={`posts/${item._id}`}><img className="" src={item.url} alt="Card cap" width={270} ></img></Link>
-                        <Link key={item._id} to={`posts/${item._id}`} style={{color: "black", textDecoration: 'none'}}>
-                            <div className="mt-2">
-                                <h5>{item.name}</h5>
-                                <p>{item.price} ₽</p>
+                        <Link key={item._id} to={`/shop/${item._id}`}><img className="" src={item.url} alt="Card cap" width={270} ></img></Link>
+                            <div className="shop__item--text">
+                                <Link key={item._id} to={`shop/${item._id}`} style={{color: "black", textDecoration: 'none'}}>
+                                    <h5>{item.name}</h5>
+                                    <p>{item.price} ₽</p>
+                                </Link>
+                                <button onClick={() => handleAddItem(item)} className="add-cart-btn">Add <i className="bi bi-cart"></i></button>
                             </div>
-                        </Link>
                     </div>
                 ))}
     </div>
