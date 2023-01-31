@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { paginate } from "../../utils/paginate"
 import api from "../../../api";
 import _ from "lodash";
-import ItemsList from "../../itemsList";
+import ItemCard from "../../itemCard";
 import Pagination from "../../pagination";
 import CategoriesList from "../../categoriesList";
 import SortButton from "../../sortButton";
@@ -19,7 +19,6 @@ const ShopPage = ({onChangeCart}) => {
     useEffect(() => {
         api.items.fetchAll().then((data) => setItems(data));
     }, []);
-
 
     useEffect(() => {
         api.categories.fetchAll().then((data) => setCategories(data));
@@ -105,11 +104,15 @@ const ShopPage = ({onChangeCart}) => {
                         />
                         <SortButton onSort={handleSort} selectedSort={sortBy}/>
                     </div>
-                    {count > 0 && (
-                        <ItemsList
-                            items={usersCrop} onChangeCart={onChangeCart}
-                        />
-                    )}
+
+                    <div className="shop__items--list">
+                        {count > 0 &&
+                            usersCrop.map((item) => (
+                                <ItemCard item={item} onChangeCart={onChangeCart} width={270}/>
+                            ))
+                        }
+                    </div>
+
                     <div className="d-flex justify-content-center">
                         <Pagination
                             itemsCount={count}

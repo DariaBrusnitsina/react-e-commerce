@@ -5,7 +5,7 @@ const About = () => {
     return (
     <div className="container">
         <Navigation/>
-        <h1>About page</h1>
+        <img alt="im" src="../img/about.jpeg"  width={470}/>
     </div>
     );
 };
