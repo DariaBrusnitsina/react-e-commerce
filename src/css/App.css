@@ -173,11 +173,10 @@ padding: 30px;
   height: 300px;
   margin-top: 100px;
   padding: 50px;
-  background: rgba(29, 30, 29, 0.3);
+  background: rgba(196, 196, 196, 0.3);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: #FFFFFF;
 }
 
 .login__title {
@@ -350,8 +349,59 @@ padding: 30px;
 }
 
 .cart__container--sum {
-  background-color: #8B8B8B;
+  background-color: #e1dfdf;
+  width: 300px;
+  height: 250px;
+  text-align: center;
 }
+
+.cart__container--sum h2{
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.cart__container--price {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkout_cart{
+  margin-top: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  font: inherit;
+  color: white;
+  background-color: #a07b7b;
+  transition: all 0.3s ease-in;
+}
+
+.cart__subtitle {
+  font-size: 20px;
+  color: #0b0a0a;
+  font-weight: 500;
+}
+
+.checkout_cart:hover{
+  color: black;
+  background-color: #e5b0b0;
+  transition: all 0.3s ease-in;
+}
+
+.clear_cart {
+  margin-top: 30px;
+  color: #6f6c6c;
+  cursor: pointer;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  text-align: end;
+}
+
 
 /* ITEMPAGE */
 .item-page {
@@ -419,9 +469,52 @@ padding: 30px;
 }
 
 .featured-text p{
-  /* padding-top: 30px; */
   font-weight: 400;
   font-size: 15px;
   line-height: 30px;
   color: #8B8B8B;
+}
+
+.cart__item {
+  margin: 20px 0;
+  background-color: #f0eded;
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.cart__item--title h3{
+  font-size: 20px;
+  color: #0b0a0a;
+  margin-bottom: 20px;
+}
+
+.cart__item--counter {
+  display: flex;
+  column-gap: 15px;
+}
+
+.cart__item--counter button {
+  cursor: pointer;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+.cart__item--price {
+  margin-right: 50px;
+}
+
+.cart__item--price button{
+  cursor: pointer;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  font-size: 12px;
+  padding: 0;
+  margin-top: 10px;
 }
