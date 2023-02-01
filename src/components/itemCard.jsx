@@ -21,11 +21,11 @@ const ItemCard = ( {item, onChangeCart, width, display}) => {
 
     return (
     <div className="shop__item">
-        <Link key={item._id} to={`/shop/${item._id}`}>
+        <Link key={item._id} to={`/react-e-commerce/shop/${item._id}`}>
             <img className="" src={item.url} alt="Card cap" width={width} />
         </Link>
         <div className="shop__item--text">
-            <Link key={item._id} to={`shop/${item._id}`} style={{color: "black", textDecoration: 'none'}}>
+            <Link key={item._id} to={`/react-e-commerce/shop/${item._id}`} style={{color: "black", textDecoration: 'none'}}>
                 <h5>{item.name}</h5>
                 <p>{item.price} ₽</p>
             </Link>

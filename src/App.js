@@ -11,14 +11,14 @@ import Login from './components/layouts/login';
 function App() {
   return (
     <Routes>
-      <Route path="/" exact element={<Home />}/>
-      <Route path="/about" element={<About />}/>
-      <Route path="/shop/:itemId?" element={<Shop />}/>
-      <Route path="/shop" element={<Shop />}/>
-      <Route path="/contact" element={<Contact />}/>
-      <Route path="/cart" element={<Cart />}/>
-      <Route path="/login" element={<Login />}/>
-  </Routes>
+      <Route path="react-e-commerce/" exact element={<Home />}/>
+      <Route path="react-e-commerce/about" element={<About />}/>
+      <Route path="react-e-commerce/shop/:itemId?" element={<Shop />}/>
+      <Route path="react-e-commerce/shop" element={<Shop />}/>
+      <Route path="react-e-commerce/contact" element={<Contact />}/>
+      <Route path="react-e-commerce/cart" element={<Cart />}/>
+      <Route path="react-e-commerce/login" element={<Login />}/>
+    </Routes>
   );
 }
 

@@ -47,7 +47,7 @@ const Cart = () => {
         </>
         : <>
             <h1 className="cart__title">Your cart is empty</h1>
-            <p className="cart__subtitle">Navigate to <Link to="/shop">shop</Link> or <Link to="/">home</Link></p>
+            <p className="cart__subtitle">Navigate to <Link to="/react-e-commerce/shop">shop</Link> or <Link to="/react-e-commerce/">home</Link></p>
         </>
     }
 
