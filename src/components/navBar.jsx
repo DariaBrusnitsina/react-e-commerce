@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useCart } from "../hooks/useCart";
 
 const NavBar = ({cartNumber}) => {
+    const {cart} = useCart()
+    console.log("cart", cart)
 
-
-
-// $(document).scroll(function(e) {
-//     $(window).scrollTop() > 100 ? $('.nav').addClass('nav__color') : $('.nav').removeClass('nav__color');
-// });
     return (
     <div className="navigation">
         <nav className="container">
@@ -17,7 +15,7 @@ const NavBar = ({cartNumber}) => {
                 <li><NavLink className="navigation--item" to="/about">About</NavLink></li>
                 <li><NavLink className="navigation--item" to="shop">Shop</NavLink></li>
                 <li><NavLink className="navigation--item" to="contact">Contact</NavLink></li>
-                <li><NavLink className="navigation--item" to="cart">Cart({cartNumber})</NavLink></li>
+                <li><NavLink className="navigation--item" to="cart">Cart({cart})</NavLink></li>
                 <li><NavLink className="navigation--item" to="login">Login</NavLink></li>
             </ul>
         </nav>

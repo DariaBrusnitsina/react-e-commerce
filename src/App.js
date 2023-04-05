@@ -8,10 +8,11 @@ import Contact from './components/layouts/contact';
 import Cart from './components/layouts/cart';
 import Login from './components/layouts/login';
 import NavBar from './components/navBar';
+import { CartProvider } from './hooks/useCart';
 
 function App() {
   return (
-  <>
+  <CartProvider>
     <NavBar/>
     <Routes>
       <Route index exact element={<Home />}/>
@@ -22,7 +23,7 @@ function App() {
       <Route path="/cart" element={<Cart />}/>
       <Route path="/login" element={<Login />}/>
     </Routes>
-  </>
+  </CartProvider>
   );
 }
 
