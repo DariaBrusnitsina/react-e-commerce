@@ -1,5 +1,5 @@
-import './css/reset.css';
-import './css/App.css';
+import './sass/main.scss';
+// import './sass/App.scss';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/layouts/home';
 import About from './components/layouts/about';

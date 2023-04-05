@@ -1,0 +1,142 @@
+/* SHOP */
+.shop__title {
+    padding: 40px 0;
+    font-size: 40px;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .shop__subtitle {
+    padding: 10px 0;
+    font-size: 25px;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  .shop__section {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px 0;
+  }
+
+  .shop__items {
+    width: 1000px;
+  }
+
+  .shop__items--list {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+  }
+
+  .shop__items--bar {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+  }
+
+  .shop__item {
+    padding: 20px;
+  }
+
+  .shop__item h5{
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 38px;
+  }
+
+  .shop__item p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+    color: #8B8B8B;
+  }
+
+  .shop__item--text {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .shop__categories {
+    background-color: #e6e5e5;
+    padding: 10px;
+    width: 150px;
+  }
+
+  .shop__category {
+    cursor: pointer;
+    padding: 15px;
+  }
+
+  .shop__category-active {
+    cursor: pointer;
+    padding: 15px;
+    color: rgb(157, 132, 113);
+  }
+
+  .reset-categories-btn {
+    padding: 15px;
+    cursor: pointer;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+  }
+
+  .search-input {
+    margin-left: 20px;
+    width: 40%;
+    border: none;
+    border-bottom: 1px solid rgb(68, 68, 68);
+    background-color: transparent;
+    color: inherit;
+    outline: none;
+  }
+
+/* PAGINATION */
+.pagination {
+    margin: 0px 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .page__item-active .page-link{
+    border-bottom: 1.5px solid rgb(68, 68, 68);
+  }
+
+  .page-link {
+    margin: 0px 5px;
+    cursor: pointer;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+  }
+
+  .sort-button {
+    margin-right: 100px;
+    column-gap: 5px;
+    display: flex;
+    cursor: pointer;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+  }
+
+  .add-cart-btn {
+    padding-top: 10px;
+    cursor: pointer;
+    border: none;
+    font: inherit;
+    color: gray;
+    background-color: transparent;
+    transition: color 0.3s ease-in;
+
+  }
+
+  .add-cart-btn:hover {
+    color: black;
+    transition: color 0.3s ease-in;
+  }
