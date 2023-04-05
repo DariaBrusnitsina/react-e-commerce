@@ -13,13 +13,14 @@ export const CartProvider = ({children}) => {
     const prevState = useRef()
 
     useEffect(() => {
-        const getQualities = async () => {
-            try {
-                // setCart(content)
-                setLoading(false)
-            } catch (error) {
-                errorCatcher(error)
-            }
+        const getQualities = () => {
+            return cart
+            // try {
+            //     // setCart(content)
+            //     setLoading(false)
+            // } catch (error) {
+            //     errorCatcher(error)
+            // }
         }
         getQualities()
     },[])
@@ -44,15 +45,28 @@ export const CartProvider = ({children}) => {
         }
     }
 
-    const addQuality = async(data) => {
-        try {
-            // const {content} = await qualityService.create(data)
-            // setCart(prevState => [...prevState, content])
-            // return content
+    const addCartItem = (data) => {
+        console.log(data)
+        setCart(prevState => [...prevState, data])
+        // console.log(data, cart)
+        // return data
 
-        } catch (error) {
-            errorCatcher(error)
-        }
+        // console.log(cart)
+        // setCart([data])
+        // const newData = [cart, data]
+        // setCart(newData)
+        // console.log(data)
+        // cart.push(data)
+        // setCart(newCart)
+        // try {
+        //     setCart({cart,...data})
+        //     // const {content} = await qualityService.create(data)
+        //     // setCart(prevState => [...prevState, content])
+        //     // return content
+
+        // } catch (error) {
+        //     errorCatcher(error)
+        // }
     }
 
     const deleteQuality = async(id) => {
@@ -79,7 +93,7 @@ export const CartProvider = ({children}) => {
         }
     }, [errors])
     return (
-    <CartContext.Provider value={{cart}}>
+    <CartContext.Provider value={{cart, addCartItem}}>
         {children}
     </CartContext.Provider>)
 }

@@ -1,29 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CartItem from "../cartItem";
+import { useCart } from "../../hooks/useCart";
 
 const Cart = () => {
-    const [cartItems, setCartItems] = useState()
+    // const [cartItems, setCartItems] = useState()
+    const {cart} = useCart()
 
-    useEffect(() => {
-        const cartValue = localStorage.getItem("cart")
-        const cartStorage = JSON.parse(cartValue)
-        setCartItems(cartStorage)
-    }, []);
+
+    // useEffect(() => {
+    //     const cartValue = localStorage.getItem("cart")
+    //     const cartStorage = JSON.parse(cartValue)
+    //     setCartItems(cartStorage)
+    // }, []);
 
     const handleClearCart = () => {
-        setCartItems(localStorage.removeItem("cart"))
+        // setCartItems(localStorage.removeItem("cart"))
     };
 
     return (
     <div className="container cart">
 
-        {cartItems ?
+        {cart ?
         <>
             <h1 className="cart__title">Your cart</h1>
             <div className="cart__container">
                 <div className="cart__container--list">
-                {cartItems.map((item) => (
+                {cart.map((item) => (
                     <CartItem item={item}/>
                     ))}
                 </div>
@@ -31,7 +34,7 @@ const Cart = () => {
                 <div className="cart__container--sum">
                     <h2>Totaly</h2>
                     <div className="cart__container--price">
-                        <p>{cartItems.length} items</p>
+                        <p>{cart.length} items</p>
                         <p>1440 ₽</p>
                     </div>
                     <button className="checkout_cart">Checkout</button>

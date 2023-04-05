@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { useCart } from "../hooks/useCart";
 
-const NavBar = ({cartNumber}) => {
+const NavBar = () => {
     const {cart} = useCart()
-    console.log("cart", cart)
 
     return (
     <div className="navigation">
@@ -15,7 +14,7 @@ const NavBar = ({cartNumber}) => {
                 <li><NavLink className="navigation--item" to="/about">About</NavLink></li>
                 <li><NavLink className="navigation--item" to="shop">Shop</NavLink></li>
                 <li><NavLink className="navigation--item" to="contact">Contact</NavLink></li>
-                <li><NavLink className="navigation--item" to="cart">Cart({cart})</NavLink></li>
+                <li><NavLink className="navigation--item" to="cart">Cart({cart.length})</NavLink></li>
                 <li><NavLink className="navigation--item" to="login">Login</NavLink></li>
             </ul>
         </nav>

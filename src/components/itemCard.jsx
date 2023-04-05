@@ -1,9 +1,13 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useCart } from "../hooks/useCart";
 
 const ItemCard = ( {item, onChangeCart, width, display}) => {
+    const {addCartItem} = useCart();
 
     const handleAddItem = (data) => {
+        console.log(data);
+        addCartItem(data)
         const local = localStorage.getItem("cart")
 
         if (local) {

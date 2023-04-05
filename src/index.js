@@ -8,7 +8,6 @@ import { createStore } from './store/createStore';
 
 const store = createStore();
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
