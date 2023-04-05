@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TextField from "../textField";
 import { validator } from "../utils/validator";
-import Navigation from "../navigation";
 
 
 const Login = () => {
@@ -42,7 +41,6 @@ const Login = () => {
     return (
         <div className="login__page">
             <div className="container">
-                <Navigation />
                 <div className="login__container">
                     <div className="login__card">
                         <h2 className="login__title">Login</h2>

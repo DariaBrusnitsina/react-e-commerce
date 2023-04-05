@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CartItem from "../cartItem";
-import Navigation from "../navigation";
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState()
@@ -17,8 +16,7 @@ const Cart = () => {
     };
 
     return (
-    <div className="container">
-        <Navigation/>
+    <div className="container cart">
 
         {cartItems ?
         <>

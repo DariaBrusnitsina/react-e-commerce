@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CategoryCard from "../categoryCard";
 import ItemCard from "../itemCard";
-import Navigation from "../navigation";
 import api from "../../api/";
+
 
 const Home = () => {
     const [featured, setFeatured] = useState();
@@ -15,7 +15,6 @@ const Home = () => {
     <>
         <header className="home__header">
             <div className="container">
-                <Navigation/>
                 <div className="home__header--text">
                     <h1>Lorem ipsumips</h1>
                     <p>Voluptate nulla atque minus dolores quas minima doloremque.</p>
@@ -51,7 +50,7 @@ const Home = () => {
                         <Link to="/react-e-commerce/about">Continue The Story</Link>
                     </div>
                 </div>
-                <img alt="about" src="../img/about.jpeg" width={470}/>
+                <img alt="about" src="./../assets/about.jpeg" width={470}/>
             </section>
 
             <section className="featured" id="featured">

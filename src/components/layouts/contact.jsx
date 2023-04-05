@@ -1,10 +1,8 @@
 import React from "react";
-import Navigation from "../navigation";
 
 const Contact = () => {
     return (
-    <div className="container">
-        <Navigation/>
+    <div className="container contact">
         <h1>contact page</h1>
     </div>
     );

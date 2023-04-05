@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const ItemCard = ( {item, onChangeCart, width, display}) => {
 
@@ -21,14 +21,14 @@ const ItemCard = ( {item, onChangeCart, width, display}) => {
 
     return (
     <div className="shop__item">
-        <Link key={item._id} to={`/react-e-commerce/shop/${item._id}`}>
+        <NavLink key={item._id} to={`${item._id}`}>
             <img className="" src={item.url} alt="Card cap" width={width} />
-        </Link>
+        </NavLink>
         <div className="shop__item--text">
-            <Link key={item._id} to={`/react-e-commerce/shop/${item._id}`} style={{color: "black", textDecoration: 'none'}}>
+            <NavLink key={item._id} to={`${item._id}`} style={{color: "black", textDecoration: 'none'}}>
                 <h5>{item.name}</h5>
                 <p>{item.price} ₽</p>
-            </Link>
+            </NavLink>
             <button style={{display: display}}onClick={() => handleAddItem(item)} className="add-cart-btn">Add <i className="bi bi-cart"></i></button>
         </div>
     </div>

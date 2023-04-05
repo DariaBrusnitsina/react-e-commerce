@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import Navigation from "../navigation";
+// import Navigation from "../navigation";
 import ShopPage from "../pages/shopPage/shopPage";
 import ItemPage from "../pages/itemPage/itemPage";
 
@@ -21,10 +21,9 @@ const Shop = () => {
     }
 
     return (
-    <>
+    <div className="shop">
         <header>
             <div className="container">
-                <Navigation cartNumber={cartNumber}/>
                 {itemId
                 ? ""
                 :<>
@@ -39,7 +38,7 @@ const Shop = () => {
             {itemId ? <ItemPage itemId={itemId} /> : <ShopPage onChangeCart={handleChangeCart}/>}
             </div>
         </main>
-    </>
+    </div>
     );
 };
 

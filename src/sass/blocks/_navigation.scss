@@ -1,7 +1,18 @@
 .navigation {
+    position: absolute;
+    top: 0;
+    // display: flex;
+    // justify-content: space-between;
+    padding: 20px 0;
+    // background: white;
+    // background-attachment: fixed;
+
+    width:100%;
+}
+
+.navigation .container {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
 }
 
 .navigation__list {
@@ -14,7 +25,6 @@
     color: #0b0a0a;
     font-weight: 500;
     transition: all 0.3s ease-in;
-
 }
 
 .navigation--item:hover {

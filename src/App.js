@@ -7,18 +7,22 @@ import Shop from './components/layouts/shop';
 import Contact from './components/layouts/contact';
 import Cart from './components/layouts/cart';
 import Login from './components/layouts/login';
+import NavBar from './components/navBar';
 
 function App() {
   return (
+  <>
+    <NavBar/>
     <Routes>
-      <Route path="react-e-commerce/" exact element={<Home />}/>
-      <Route path="react-e-commerce/about" element={<About />}/>
-      <Route path="react-e-commerce/shop/:itemId?" element={<Shop />}/>
-      <Route path="react-e-commerce/shop" element={<Shop />}/>
-      <Route path="react-e-commerce/contact" element={<Contact />}/>
-      <Route path="react-e-commerce/cart" element={<Cart />}/>
-      <Route path="react-e-commerce/login" element={<Login />}/>
+      <Route index exact element={<Home />}/>
+      <Route path="/about" element={<About />}/>
+      <Route path="/shop/*" element={<Shop />}/>
+      <Route path="/shop" element={<Shop />}/>
+      <Route path="/contact" element={<Contact />}/>
+      <Route path="/cart" element={<Cart />}/>
+      <Route path="/login" element={<Login />}/>
     </Routes>
+  </>
   );
 }
 
