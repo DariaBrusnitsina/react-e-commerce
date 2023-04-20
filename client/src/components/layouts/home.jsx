@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CategoryCard from "../categoryCard";
-import ItemCard from "../itemCard";
+import CategoryCard from "../shopPages/categoryCard";
+import ItemCard from "../shopPages/itemCard";
 import api from "../../api/";
 
 

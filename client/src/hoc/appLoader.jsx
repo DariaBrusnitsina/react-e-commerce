@@ -9,7 +9,6 @@ import {
 const AppLoader = ({ children }) => {
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(getIsLoggedIn());
-    console.log("app", isLoggedIn)
     const usersStatusLoading = useSelector(getUsersLoadingStatus());
     useEffect(() => {
 

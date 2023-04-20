@@ -4,7 +4,7 @@ import authService from "../services/auth.service";
 import localStorageService from "../services/localStorage.service";
 import history from "../utils/history";
 import generateAuthError from "../utils/generateAuthError";
-
+import {useNavigate} from "react-router-dom";
 
 const initialState = localStorageService.getAccessToken()
     ? {
@@ -23,7 +23,6 @@ const initialState = localStorageService.getAccessToken()
         isLoggedIn: false,
         dataLoaded: false
     };
-
 
 const usersSlice = createSlice({
     name: "users",
@@ -90,15 +89,19 @@ const userUpdateRequested = createAction("users/userUpdateRequested");
 const userUpdateFailed = createAction("users/userUpdateFailed");
 
 export const login =
-    ({ payload, redirect }) =>
+    ({ payload }) =>
         async (dispatch) => {
             const { email, password } = payload;
             dispatch(authRequested());
             try {
+                const navigate = useNavigate()
                 const data = await authService.login({ email, password });
                 dispatch(authRequestSuccess({ userId: data.localId }));
                 localStorageService.setTokens(data);
-                history.push(redirect);
+
+                const path = `/shop`
+                navigate(path, { replace: true });
+
             } catch (error) {
                 const { code, message } = error.response.data.error;
                 if (code === 400) {
@@ -120,6 +123,7 @@ export const signUp =
                 dispatch(authRequestSuccess({ userId: data.localId }));
                 dispatch(
                     createUser({
+                        email,
                         _id: data.localId,
                         sale: 0,
                         orders: [],
@@ -172,7 +176,6 @@ export const loadUsersList = () => async (dispatch, getState) => {
 
 export const getUsersList = () => (state) => state.users.entities;
 export const getCurrentUserData = () => (state) => {
-    console.log(state.users)
     return state.users.entities
         ? state.users.entities.find((u) => u._id === state.users.auth.userId)
         : null;
