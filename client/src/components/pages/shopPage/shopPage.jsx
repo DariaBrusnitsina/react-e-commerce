@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { paginate } from "../../utils/paginate"
+import { paginate } from "../../../utils/paginate"
 import api from "../../../api";
 import _ from "lodash";
 import ItemCard from "../../itemCard";

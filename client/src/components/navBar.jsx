@@ -1,9 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useCart } from "../hooks/useCart";
+import {useSelector} from "react-redux";
+import {getIsLoggedIn} from "../store/users";
+import NavProfile from "./ui/navProfile";
 
 const NavBar = () => {
     const {cartLength} = useCart()
+    const isLoggedIn = useSelector(getIsLoggedIn());
+    console.log(isLoggedIn)
 
     return (
     <div className="navigation">
@@ -15,7 +20,14 @@ const NavBar = () => {
                 <li><NavLink className="navigation--item" to="shop">Shop</NavLink></li>
                 <li><NavLink className="navigation--item" to="contact">Contact</NavLink></li>
                 <li><NavLink className="navigation--item" to="cart">Cart({cartLength})</NavLink></li>
-                <li><NavLink className="navigation--item" to="login">Login</NavLink></li>
+                {isLoggedIn
+                    ? (
+                        <li><NavProfile className="navigation--item" to="login">Login</NavProfile></li>
+                    )
+                    : (
+                        <li><NavLink className="navigation--item" to="login">Login</NavLink></li>
+
+                    )}
             </ul>
         </nav>
     </div>

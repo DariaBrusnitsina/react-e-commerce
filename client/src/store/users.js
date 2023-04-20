@@ -2,9 +2,9 @@ import { createAction, createSlice } from "@reduxjs/toolkit";
 import userService from "../services/user.service";
 import authService from "../services/auth.service";
 import localStorageService from "../services/localStorage.service";
-import getRandomInt from "../utils/getRandomInt";
 import history from "../utils/history";
 import generateAuthError from "../utils/generateAuthError";
+
 
 const initialState = localStorageService.getAccessToken()
     ? {
@@ -23,6 +23,7 @@ const initialState = localStorageService.getAccessToken()
         isLoggedIn: false,
         dataLoaded: false
     };
+
 
 const usersSlice = createSlice({
     name: "users",
@@ -120,14 +121,8 @@ export const signUp =
                 dispatch(
                     createUser({
                         _id: data.localId,
-                        email,
-                        rate: getRandomInt(1, 5),
-                        completedMeetings: getRandomInt(0, 200),
-                        image: `https://avatars.dicebear.com/api/avataaars/${(
-                            Math.random() + 1
-                        )
-                            .toString(36)
-                            .substring(7)}.svg`,
+                        sale: 0,
+                        orders: [],
                         ...rest
                     })
                 );
@@ -177,6 +172,7 @@ export const loadUsersList = () => async (dispatch, getState) => {
 
 export const getUsersList = () => (state) => state.users.entities;
 export const getCurrentUserData = () => (state) => {
+    console.log(state.users)
     return state.users.entities
         ? state.users.entities.find((u) => u._id === state.users.auth.userId)
         : null;
