@@ -1,7 +1,3 @@
-## Available Scripts
-### `cd client npm run start`
-### `cd server node run serve`
-
 ## Функционал приложения
 ### Frontend-часть проекта [6/11]
 - [x] Добавление списка элементов:
