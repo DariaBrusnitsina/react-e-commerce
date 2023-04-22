@@ -4,7 +4,7 @@ const items = [
     {
         _id: "1",
         name: "Piala Constellation",
-        url: "https://sun9-82.userapi.com/uUMFkbY6IRcZwwveaJBZ5cLB2-tc-yz0m6-bHg/LTV_--8G0T4.jpg",
+        url: "https://sun9-69.userapi.com/90GKjpt3tR2qMGva0yNXJW-wV0ib-D0AAftqpA/5vpqj00OEqQ.jpg",
         category: categories.piala,
         price: 1300,
     },

@@ -23,8 +23,7 @@ function App() {
             <Routes>
               <Route index exact element={<Home />}/>
               <Route path="/about" element={<About />}/>
-              <Route path="/shop/*" element={<Shop />}/>
-              <Route path="/shop" element={<Shop />}/>
+              <Route path="/shop/:itemId?" element={<Shop />}/>
               <Route path="/contact" element={<Contact />}/>
               <Route path="/cart" element={<Cart />}/>
               <Route path="/login" element={<AuthLayout />}/>

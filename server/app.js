@@ -2,7 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose");
 const config = require("config")
 const chalk = require("chalk")
-const routes = require("./routes/routes")
+const routes = require("./routes/index")
 const initDatabase = require("./startUp/initDatabase")
 
 

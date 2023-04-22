@@ -4,6 +4,7 @@ const schema = new Schema({
     name: {type: String},
     url: {type: String},
     category: {type: String},
+    description: {type: String},
     price: Number,
 }, {
     timestamps: true
