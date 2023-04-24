@@ -4,10 +4,11 @@ import TextField from "../common/form/textField";
 import CheckBoxField from "../common/form/checkBoxField";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store/users";
-
+import {useNavigate} from "react-router-dom";
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const [data, setData] = useState({
         name: "",
         surname: "",
@@ -15,11 +16,11 @@ const RegisterForm = () => {
         phone: "",
         password: "",
         address: "",
+        sale: 0,
         licence: false
     });
 
     const [errors, setErrors] = useState({});
-
     const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
@@ -87,8 +88,8 @@ const RegisterForm = () => {
         const isValid = validate();
         if (!isValid) return;
         const newData = {...data};
-        console.log(newData)
         dispatch(signUp(newData));
+        navigate('/shop', {replace: true})
     };
 
     return ( <div>

@@ -16,8 +16,8 @@ const Shop = () => {
                 {itemId
                 ? ""
                 :<>
-                    <h1 className="shop__title">Lorem ipsum dolor sit amet</h1>
-                    <p className="shop__subtitle">Praesentium facere quo consequatur laudantium, omnis mollitia eaque.</p>
+                    <h1 className="title">Lorem ipsum dolor sit amet</h1>
+                    <p className="subtitle">Praesentium facere quo consequatur laudantium, omnis mollitia eaque.</p>
                 </>
                 }
             </div>

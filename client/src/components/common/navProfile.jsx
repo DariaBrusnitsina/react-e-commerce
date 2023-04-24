@@ -5,6 +5,7 @@ import { getCurrentUserData } from "../../store/users";
 
 function NavProfile() {
     const currentUser = useSelector(getCurrentUserData());
+
     const [isOpen, setOpen] = useState(false);
     const toggleMenu = () => {
         setOpen((prevState) => !prevState);

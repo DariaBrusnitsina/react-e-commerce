@@ -94,15 +94,11 @@ export const login =
             const { email, password } = payload;
             dispatch(authRequested());
             try {
-                const navigate = useNavigate()
                 const data = await authService.login({ email, password });
-                dispatch(authRequestSuccess({ userId: data.localId }));
                 localStorageService.setTokens(data);
-
-                const path = `/shop`
-                navigate(path, { replace: true });
-
+                dispatch(authRequestSuccess({ userId: data.userId }));
             } catch (error) {
+                console.log(error)
                 const { code, message } = error.response.data.error;
                 if (code === 400) {
                     const errorMessage = generateAuthError(message);
@@ -113,31 +109,23 @@ export const login =
             }
         };
 
-export const signUp =
-    ({ email, password, ...rest }) =>
+export const signUp = (payload) =>
         async (dispatch) => {
             dispatch(authRequested());
             try {
-                const data = await authService.register({ email, password });
+                const data = await authService.register(payload);
                 localStorageService.setTokens(data);
-                dispatch(authRequestSuccess({ userId: data.localId }));
-                dispatch(
-                    createUser({
-                        email,
-                        _id: data.localId,
-                        sale: 0,
-                        orders: [],
-                        ...rest
-                    })
-                );
+                dispatch(authRequestSuccess({ userId: data.userId }));
+
             } catch (error) {
+                console.log(error)
                 dispatch(authRequestFailed(error.message));
             }
         };
+
 export const logOut = () => (dispatch) => {
     localStorageService.removeAuthData();
     dispatch(userLoggedOut());
-    history.push("/");
 };
 
 export const updateUserData = (payload) => async (dispatch) => {
@@ -145,26 +133,12 @@ export const updateUserData = (payload) => async (dispatch) => {
     try {
         const { content } = await userService.update(payload);
         dispatch(userUpdateSuccessed(content));
-        history.push(`/users/${content._id}`);
     } catch (error) {
         dispatch(userUpdateFailed(error.message));
     }
 };
 
-function createUser(payload) {
-    return async function (dispatch) {
-        dispatch(userCreateRequested());
-        try {
-            const { content } = await userService.create(payload);
-            dispatch(userCreated(content));
-            history.push("/users");
-        } catch (error) {
-            dispatch(createUserFailed(error.message));
-        }
-    };
-}
-
-export const loadUsersList = () => async (dispatch, getState) => {
+export const loadUsersList = () => async (dispatch) => {
     dispatch(usersRequested());
     try {
         const { content } = await userService.get();

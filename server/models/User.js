@@ -7,6 +7,7 @@ const schema = new Schema({
     password: {type: String},
     address: {type: String},
     phone: Number,
+    orders: {type: Array},
     sale: Number,
     licence: {type: Boolean}
 }, {

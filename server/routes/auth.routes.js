@@ -6,7 +6,7 @@ const User = require("../models/User")
 const TokenService = require('../services/token.service')
 
 
-router.post('/sighUp', [
+router.post('/signUp', [
     check('email', 'Uncorrected email').isEmail(),
     check('password', 'Min length is 8').isLength({min: 8}),
     async (req, res) => {
@@ -21,7 +21,7 @@ router.post('/sighUp', [
                     }
                 })
             }
-            const {email, password} = req.body
+            const {email, password } = req.body
             const existingUser = await User.findOne({email})
 
             if (existingUser) {
@@ -32,10 +32,10 @@ router.post('/sighUp', [
                     }
                 })
             }
-
             const hashedPassword = await bcrypt.hash(password, 12)
+            console.log(req.body)
 
-            const newUser = User.create({
+            const newUser = await User.create({
                 ...req.body,
                 password: hashedPassword
             })
@@ -43,7 +43,7 @@ router.post('/sighUp', [
             const tokens = TokenService.generate({_id: newUser._id})
             await TokenService.save(newUser._id, tokens.refreshToken)
 
-            res.status(201).send({...tokens, userId:newUser._id })
+            res.status(201).send({...tokens, userId: newUser._id })
         }catch (e) {
             res.status(500).json({
                 message: "Server error. Try again later..."

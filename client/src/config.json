@@ -1,4 +1,4 @@
 {
-  "apiEndpoint": "https://react-e-commerce-d0b57-default-rtdb.europe-west1.firebasedatabase.app/",
-  "isFireBase": true
+  "apiEndpoint": "http://localhost:8000/api",
+  "isFireBase": false
 }

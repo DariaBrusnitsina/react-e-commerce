@@ -1,8 +1,11 @@
 import React from "react";
-import {Link, redirect, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import OrderCard from "./orderCard";
 
-const ProfileInfo = ({ user }) => {
+const ProfileInfo = ({user}) => {
     const navigate = useNavigate();
+    // const user = useSelector(getCurrentUserData());
+    console.log("user.orders", user.orders)
 
     const handleClick = () => {
         const path = `/${user._id}/edit`
@@ -35,10 +38,12 @@ const ProfileInfo = ({ user }) => {
                     <div>
                         <div>
                             <h2>Your orders</h2>
-                            { user.orders
+                            { user.orders && user.orders.length !== undefined
                                 ? <div>
-                                    <h3>Orders</h3>
                                     <ul>
+                                        {user.orders.map((data, index) => (
+                                            <li><OrderCard data={data} index={index}/></li>
+                                        ))}
 
                                     </ul>
                                 </div>

@@ -1,21 +1,9 @@
-/* SHOP */
+$gray: #8B8B8B;
+$red: red;
 
 .shop {
   margin-top: 60px;
 }
-.shop__title {
-    padding: 40px 0;
-    font-size: 40px;
-    text-align: center;
-    font-weight: 700;
-  }
-
-  .shop__subtitle {
-    padding: 10px 0;
-    font-size: 25px;
-    text-align: center;
-    font-weight: 400;
-  }
 
   .shop__section {
     display: flex;
@@ -39,29 +27,47 @@
     padding-bottom: 10px;
   }
 
-  .shop__item {
-    padding: 20px;
-  }
 
-  .shop__item h5{
+/* ITEM-CARD ELEMENT */
+.shop-item {
+  padding: 20px;
+}
+
+.shop-item__text {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 270px;
+
+  h5 {
     font-weight: 500;
     font-size: 20px;
-    line-height: 38px;
+    line-height: normal;
   }
 
-  .shop__item p{
+  p {
+    margin-top: 5px;
     font-weight: 400;
     font-size: 16px;
     line-height: 30px;
-    color: #8B8B8B;
+    color: $gray;
   }
+}
 
-  .shop__item--text {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+.shop-item__add-btn {
+  line-height: normal;
+  width: 70px;
+  color: $gray;
+  transition: color 0.3s ease-in;
+
+  &:hover {
+    color: black;
+    transition: color 0.3s ease-in;
   }
+}
 
+/* PAGINATION */
   .shop__categories {
     background-color: #e6e5e5;
     padding: 10px;
@@ -81,11 +87,6 @@
 
   .reset-categories-btn {
     padding: 15px;
-    cursor: pointer;
-    border: none;
-    font: inherit;
-    color: inherit;
-    background-color: transparent;
   }
 
   .search-input {
@@ -129,18 +130,4 @@
     background-color: transparent;
   }
 
-  .add-cart-btn {
-    padding-top: 10px;
-    cursor: pointer;
-    border: none;
-    font: inherit;
-    color: gray;
-    background-color: transparent;
-    transition: color 0.3s ease-in;
 
-  }
-
-  .add-cart-btn:hover {
-    color: black;
-    transition: color 0.3s ease-in;
-  }

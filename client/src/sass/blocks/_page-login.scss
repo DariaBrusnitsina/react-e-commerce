@@ -150,7 +150,15 @@ text-align: center;
   align-items: center;
 }
 
-.check-label-invalid {
+.check-label-invalid, {
   color: #b74141;
 }
+
+.text-danger {
+  color: #b74141;
+  //text-align: center;
+  margin: 10px 0;
+  line-height: 120%;
+}
+
 

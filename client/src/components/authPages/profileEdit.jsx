@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
-// import BackHistoryButton from "../../common/backButton";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUserData, updateUserData } from "../../store/users";
 import {useNavigate} from "react-router-dom";
@@ -18,9 +17,7 @@ const EditUserPage = () => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
-        dispatch(
-            updateUserData({...data})
-        );
+        dispatch(updateUserData({...data}));
         const path = `/${currentUser._id}`
         navigate(path, { replace: true });
     };
@@ -124,7 +121,7 @@ const EditUserPage = () => {
                             </form>
                         )
                         : (
-                            "Loading..."
+                            "Loasadfgbfding..."
                         )}
                 </div>
             </div>

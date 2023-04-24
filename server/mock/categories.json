@@ -1,7 +1,7 @@
 [
-    { "_id": "dnp9pdq38ekov42n", "name": "piala" },
-    { "_id": "dnp9pdq3s35e6a2o", "name": "teapot" },
-    { "_id": "dnp9pdq3856pgv6r", "name": "tea lotus" },
-    { "_id": "dnp9pdq3zc72u92h", "name": "bowl" },
-    { "_id": "dnp9pdq37n7q8mgx", "name": "other" }
+    { "id": "dnp9pdq38ekov42n", "name": "piala" },
+    { "id": "dnp9pdq3s35e6a2o", "name": "teapot" },
+    { "id": "dnp9pdq3856pgv6r", "name": "tea lotus" },
+    { "id": "dnp9pdq3zc72u92h", "name": "bowl" },
+    { "id": "dnp9pdq37n7q8mgx", "name": "other" }
 ]

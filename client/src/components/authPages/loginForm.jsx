@@ -43,15 +43,15 @@ const LoginForm = () => {
         validate();
     }, [data]);
 
-
     const isValid = Object.keys(errors).length === 0;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-         console.log(data)
         const isValid = validate();
         if (!isValid) return;
         dispatch(login({ payload: data }));
+        navigate('/shop', {replace: true})
+
     };
     return (
         <div >
