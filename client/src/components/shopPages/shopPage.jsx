@@ -8,7 +8,7 @@ import SortButton from "./sortButton";
 import {useDispatch, useSelector} from "react-redux";
 import {getItems} from "../../store/items";
 import {getCategories} from "../../store/categories";
-import ImageGrid from "./skeletonShop";
+import SkeletonShop from "./skeletonShop";
 
 const ShopPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -121,7 +121,7 @@ const ShopPage = () => {
             </div>
         );
     }
-    return <ImageGrid />;
+    return <SkeletonShop />;
 };
 
 export default ShopPage;

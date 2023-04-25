@@ -4,6 +4,7 @@ import CartItem from "./cartItem";
 import { useCart } from "../../hooks/useCart";
 import {getCurrentUserData, updateUserData} from "../../store/users";
 import {useDispatch, useSelector} from "react-redux";
+import CartModal from "./cartModal";
 
 const Cart = () => {
     const dispatch = useDispatch();
@@ -47,11 +48,14 @@ const Cart = () => {
                             <div>
                                 <button onClick={() => clearCart()} className="clear_cart">clear cart</button>
                             </div>
-
                         </div>
+                    </div>
+                    <div className={"modal"}>
+                        <CartModal totalPrice={totalPrice} clearCart={clearCart}/>
 
                     </div>
                 </>
+
                 : <>
                     <h1 className="cart__title">Your cart is empty</h1>
                     <p className="cart__subtitle">Navigate to <Link to="/shop">shop</Link> or <Link to="/">home</Link></p>

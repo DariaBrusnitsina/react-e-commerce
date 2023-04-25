@@ -21,7 +21,6 @@ const AppLoader = ({ children }) => {
         }
     }, [isLoggedIn]);
 
-    if (usersStatusLoading) return "Loading...";
     return children;
 };
 

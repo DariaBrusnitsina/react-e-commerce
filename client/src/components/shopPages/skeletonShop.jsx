@@ -1,7 +1,8 @@
 import React from 'react'
 import ContentLoader from 'react-content-loader'
 
-const ImageGrid = props => (
+
+const SkeletonShop = props => (
     <ContentLoader
         width={1220}
         height={575}
@@ -36,4 +37,4 @@ const ImageGrid = props => (
     </ContentLoader>
 )
 
-export default ImageGrid
+export default SkeletonShop

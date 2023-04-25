@@ -30,7 +30,7 @@ const AuthLayout = () => {
                         </div>
                     ) : (
                         <div className="login__card">
-                            <LoginForm />
+                            <LoginForm path={"/shop"}/>
                             <p className="dont_have_account">
                                 Don't have an account?{" "}
                                 <a role="button" onClick={toggleFormType}>

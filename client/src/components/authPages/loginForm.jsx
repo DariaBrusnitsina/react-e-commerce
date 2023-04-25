@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAuthError, login } from "../../store/users";
 import {useNavigate} from "react-router-dom";
 
-const LoginForm = () => {
+const LoginForm = ({path}) => {
     const navigate = useNavigate()
     const [data, setData] = useState({
         email: "",
@@ -50,7 +50,7 @@ const LoginForm = () => {
         const isValid = validate();
         if (!isValid) return;
         dispatch(login({ payload: data }));
-        navigate('/shop', {replace: true})
+        navigate(path, {replace: true})
 
     };
     return (
