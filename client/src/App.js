@@ -12,6 +12,7 @@ import { CartProvider } from './hooks/useCart';
 import AppLoader from "./hoc/appLoader";
 import Profile from "./components/authPages/profile";
 import LogOut from "./components/authPages/logOut";
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             </AppLoader>
 
           </CartProvider>
+          <ToastContainer />
       </div>
 
   );

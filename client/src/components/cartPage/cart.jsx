@@ -6,59 +6,81 @@ import {getCurrentUserData, updateUserData} from "../../store/users";
 import {useDispatch, useSelector} from "react-redux";
 import CartModal from "./cartModal";
 
+
+const CssClasses = {
+    CART: "cart",
+    WRAPPER: "cart__wrapper",
+    TITLE: "cart__title",
+    SUBTITLE: "cart__subtitle",
+    CHECKOUT: "checkout",
+    PRICE: "checkout__price",
+    TO_MODAL: "button-submit",
+    CLEAR: "checkout__button--clear"
+}
+
 const Cart = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector(getCurrentUserData());
     const {cart, clearCart, cartLength, totalPrice} = useCart()
+    const [modalIsOpen, setIsOpen] = useState(false);
+
 
     const submitCart = async (e) => {
         e.preventDefault();
-        const newData = {...currentUser}
-        console.log("1", newData)
-
-        let cartArray = newData.orders
-
-        newData.orders = [...cartArray, ...[cart]]
-        console.log(newData)
-        dispatch(updateUserData(newData));
+        setIsOpen(true)
+        // const newData = {...currentUser}
+        // console.log("1", newData)
+        //
+        // let cartArray = newData.orders
+        //
+        // newData.orders = [...cartArray, ...[cart]]
+        // console.log(newData)
+        // dispatch(updateUserData(newData));
         // console.log(newData)
         // navigate(path, { replace: true });
     };
 
-    // console.log(currentUser.orders)
+    function closeModal() {
+        setIsOpen(false);
+    }
+
     return (
-        <div className="container cart">
+        <div className={CssClasses.CART + " container"}>
             {cart.length !== 0 ?
                 <>
-                    <h1 className="cart__title">Your cart</h1>
-                    <div className="cart__container">
-                        <div className="cart__container--list">
+                    <h1 className={CssClasses.TITLE}>Your cart</h1>
+                    <div className={CssClasses.WRAPPER}>
+                        <div>
                             {cart.map((data) => (
                                 <CartItem data={data}/>
                             ))}
                         </div>
 
-                        <div className="cart__container--sum">
+                        <div className={CssClasses.CHECKOUT}>
                             <h2>Totally</h2>
-                            <div className="cart__container--price">
+                            <div className={CssClasses.PRICE}>
                                 <p>{cartLength} items</p>
                                 <p>{totalPrice} ₽</p>
                             </div>
-                            <button onClick={(e) => submitCart(e)} className="checkout_cart">Checkout</button>
+                            <button onClick={(e) => submitCart(e)} className={CssClasses.TO_MODAL}>
+                                Checkout
+                                <i className="bi bi-bag-check"></i>
+                            </button>
                             <div>
-                                <button onClick={() => clearCart()} className="clear_cart">clear cart</button>
+                                <button onClick={() => clearCart()} className={CssClasses.CLEAR}>clear cart</button>
                             </div>
                         </div>
-                    </div>
-                    <div className={"modal"}>
-                        <CartModal totalPrice={totalPrice} clearCart={clearCart}/>
 
+                    </div>
+
+                    <div className={"modal"}>
+                        <CartModal closeModal={closeModal} totalPrice={totalPrice} clearCart={clearCart} modalIsOpen={modalIsOpen}/>
                     </div>
                 </>
 
                 : <>
-                    <h1 className="cart__title">Your cart is empty</h1>
-                    <p className="cart__subtitle">Navigate to <Link to="/shop">shop</Link> or <Link to="/">home</Link></p>
+                    <h1 className={CssClasses.TITLE}>Your cart is empty</h1>
+                    <p className={CssClasses.SUBTITLE}>Navigate to <Link to="/shop">shop</Link> or <Link to="/">home</Link></p>
                 </>
             }
 

@@ -87,6 +87,7 @@ const userCreateRequested = createAction("users/userCreateRequested");
 const createUserFailed = createAction("users/createUserFailed");
 const userUpdateRequested = createAction("users/userUpdateRequested");
 const userUpdateFailed = createAction("users/userUpdateFailed");
+const removeUserRequested = createAction("comments/removeUserRequested");
 
 export const login =
     ({ payload }) =>
@@ -135,6 +136,18 @@ export const updateUserData = (payload) => async (dispatch) => {
         dispatch(userUpdateSuccessed(content));
     } catch (error) {
         dispatch(userUpdateFailed(error.message));
+    }
+};
+
+export const removeUser = (userId) => async (dispatch) => {
+    dispatch(removeUserRequested());
+    try {
+        const { content } = await userService.removeUser(userId);
+        if (content === null) {
+            dispatch(usersReceived(userId));
+        }
+    } catch (error) {
+        dispatch(usersRequestFailed(error.message));
     }
 };
 

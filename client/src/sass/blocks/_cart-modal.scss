@@ -1,38 +1,53 @@
-.cart-modal {
-  //opacity: 0;
-  border-radius: 9px;
-  position: fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  width: 1000px;
-  height: 600px;
-  background: #c5c5c5;
-  //z-index: -10;
-  transition: opacity 0.3s ease-in;
-  display: flex;
-  justify-content: space-between;
-  column-gap: 5%;
-}
+$panel: #dbd6d0;
+$accent: #81b4e5;
+$gray: #8f8f8f;
 
 .cart-modal__title {
-  font-size: 30px;
-  font-weight: 500;
+  font-size: 25px;
+  font-weight: 700;
   margin: 50px 0;
   text-align: center;
   line-height: 2.5rem;
 }
 
+// AUTH
 .cart-modal__auth {
-  width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
 
 }
-.cart-modal__container {
+
+.cart-modal__auth-login {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  padding: 25px;
+}
+
+.cart-modal__auth-info {
+  width: 300px;
+  background: $accent;
+  padding: 0 25px;
+
+  p {
+    line-height: 150%;
+
+  }
+
+  a {
+    color: white;
+  }
+
+}
+
+// AUTH
+
+
+.cart-modal {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  //flex-direction: column;
+  //flex-wrap: wrap;
+  background: #1258c4;
 }
 .cart-modal__subtitle {
   font-size: 20px;

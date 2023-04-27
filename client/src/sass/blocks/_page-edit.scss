@@ -1,4 +1,4 @@
-.edit .container {
+.edit-container .container {
   display: flex;
   justify-content: center;
 }
@@ -8,4 +8,56 @@
   margin-top: 100px;
   padding: 50px;
   background: rgba(196, 196, 196, 0.3);
+}
+
+.edit__btn-delete {
+  margin-top: 30px;
+  text-align: center;
+  color: #b74141;
+  transition: color 0.3s ease-in;
+
+
+  &:hover {
+    color: #0b0a0a;
+    transition: color 0.3s ease-in;
+  }
+}
+
+.edit-modal {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+
+  button {
+    margin: 10px 0;
+  }
+}
+
+.edit-modal__title {
+  text-align: center;
+  color: #b74141;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.edit-modal__subtitle {
+  margin: 10px 0;
+}
+
+.edit-modal__btn-yes {
+  padding: 10px 10px;
+  border-radius: 5px;
+  background: #b74141;
+  color: white;
+
+  &:hover {
+  background: #a07b7b;
+  color: #0b0a0a;
+  }
+}
+
+.edit-modal__btn-no {
+  padding: 10px 10px;
+  border-radius: 5px;
+  background: #686869;
 }

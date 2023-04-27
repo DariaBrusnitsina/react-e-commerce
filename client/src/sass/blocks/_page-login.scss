@@ -1,3 +1,6 @@
+$accent: #81b4e5;
+$error: #ca646f;
+
 .login__page {
   display: flex;
   justify-content: center;
@@ -59,7 +62,7 @@
 }
 
 .input-label {
-  color: #1258c4;
+  color: $accent;
   position: absolute;
   bottom: 30px;
   transition: .25s ease;
@@ -72,7 +75,7 @@
   z-index: 1;
   background-color: transparent;
   outline: none;
-  border-bottom: 2px solid #1258c4;
+  border-bottom: 2px solid $accent;
   font: inherit;
   font-size: 15px;
 
@@ -115,15 +118,6 @@
 .submit-btn {
   padding: 10px 20px;
   color: #eee;
-}
-
-.validform {
-  background: #1258c4;
-  cursor: pointer;
-}
-
-.invalidform {
-  background: #c7a8a8;
 }
 
 .al {

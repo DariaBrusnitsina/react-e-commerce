@@ -1,0 +1,30 @@
+$accent: #81b4e5;
+$error: #ca646f;
+
+.button-submit {
+  margin: 50px 0;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  background-color: $accent;
+  transition: all 0.3s ease-in;
+  font-weight: 500;
+  font-size: 20px;
+
+  i {
+    margin-left: 10px;
+  }
+
+  &:hover{
+    color: $accent;
+    background-color: white;
+    transition: all 0.3s ease-in;
+  }
+
+}
+
+.invalidform {
+  background: $error !important;
+  color: white !important;
+  cursor: default;
+}

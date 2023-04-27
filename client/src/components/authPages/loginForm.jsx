@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAuthError, login } from "../../store/users";
 import {useNavigate} from "react-router-dom";
 
+const CssClasses = {
+    LOGIN: "button-submit"
+}
+
 const LoginForm = ({path}) => {
     const navigate = useNavigate()
     const [data, setData] = useState({
@@ -77,10 +81,11 @@ const LoginForm = ({path}) => {
             {loginError && <p className="text-danger">{loginError}</p>}
                 <div className="form-btn">
                     <button
-                        className={isValid ? "submit-btn validform" : "submit-btn invalidform"}
+                        className={isValid ? "button-submit validform" : "button-submit invalidform"}
                         type="submit"
                     >
-                        Submit
+                        Log In
+                        <i className="bi bi-box-arrow-in-right"></i>
                     </button>
                 </div>
         </form>

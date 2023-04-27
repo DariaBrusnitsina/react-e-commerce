@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { logOut } from "../../store/users";
+import {logOut, removeUser} from "../../store/users";
 import {useNavigate} from "react-router-dom";
 
 const LogOut = () => {
