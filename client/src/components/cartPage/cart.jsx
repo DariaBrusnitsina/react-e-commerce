@@ -19,28 +19,14 @@ const CssClasses = {
 }
 
 const Cart = () => {
-    const dispatch = useDispatch();
-    const currentUser = useSelector(getCurrentUserData());
     const {cart, clearCart, cartLength, totalPrice} = useCart()
     const [modalIsOpen, setIsOpen] = useState(false);
 
+    function handleOpenModal() {
+        setIsOpen(true);
+    }
 
-    const submitCart = async (e) => {
-        e.preventDefault();
-        setIsOpen(true)
-        // const newData = {...currentUser}
-        // console.log("1", newData)
-        //
-        // let cartArray = newData.orders
-        //
-        // newData.orders = [...cartArray, ...[cart]]
-        // console.log(newData)
-        // dispatch(updateUserData(newData));
-        // console.log(newData)
-        // navigate(path, { replace: true });
-    };
-
-    function closeModal() {
+    function handleCloseModal() {
         setIsOpen(false);
     }
 
@@ -62,7 +48,7 @@ const Cart = () => {
                                 <p>{cartLength} items</p>
                                 <p>{totalPrice} ₽</p>
                             </div>
-                            <button onClick={(e) => submitCart(e)} className={CssClasses.TO_MODAL}>
+                            <button onClick={() => handleOpenModal()} className={CssClasses.TO_MODAL}>
                                 Checkout
                                 <i className="bi bi-bag-check"></i>
                             </button>
@@ -74,7 +60,7 @@ const Cart = () => {
                     </div>
 
                     <div className={"modal"}>
-                        <CartModal closeModal={closeModal} totalPrice={totalPrice} clearCart={clearCart} modalIsOpen={modalIsOpen}/>
+                        <CartModal cart={cart} closeModal={handleCloseModal} totalPrice={totalPrice} clearCart={clearCart} modalIsOpen={modalIsOpen}/>
                     </div>
                 </>
 

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import {useSelector} from "react-redux";
-import {getCurrentUserData} from "../../store/users";
+import React, { useState } from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getCurrentUserData, updateUserData} from "../../store/users";
 import LoginForm from "../authPages/loginForm";
 import Modal from 'react-modal';
 import {Link, NavLink} from "react-router-dom";
 import RadioField from "../common/form/radioField";
 import {getDiscount} from "../../utils/getDiscount";
+import {useCart} from "../../hooks/useCart";
 
 const customStyles = {
     content: {
@@ -40,18 +41,35 @@ const CartModalTexts = {
     SUBTITLE: "Voluptate nulla atque minus dolores quas minima doloremque.",
 }
 
-const CartModal = ({totalPrice, clearCart, modalIsOpen, closeModal}) => {
+const CartModal = ({totalPrice, modalIsOpen, closeModal, cart}) => {
+    const {clearCart} = useCart()
+    const dispatch = useDispatch();
+    const currentUser = useSelector(getCurrentUserData());
+    const [payment, setPayment] = useState(null)
     const now = Date.now()
     const date = new Date(now);
-    date.setDate((date.getDate() + 3))
     const options = { weekday: 'long', month: 'long', day: 'numeric' }
-    const displayDate = date.toLocaleDateString('en-EN', options)
-    const currentUser = useSelector(getCurrentUserData());
+    const from = date.toLocaleDateString('en-EN', options)
+    date.setDate((date.getDate() + 3))
+    const to = date.toLocaleDateString('en-EN', options)
+    const discount = currentUser ?  getDiscount(currentUser) : 0
 
-    const discount = getDiscount(currentUser)
-    const afterDiscount = (totalPrice * (100-discount))/100
+    const handleChange = (target) => {
+        setPayment(target.value)
+    }
 
-
+    const submitCart = async (e) => {
+        e.preventDefault();
+        if (payment === null || !currentUser.address.length) return
+        const newData = {...currentUser}
+        let cartArray = newData.orders
+        newData.orders = [...cartArray, {cart, from, to, payment}]
+        newData.sale = getDiscount(newData) > 15 ? 15 : getDiscount(newData)
+        console.log(newData)
+        dispatch(updateUserData(newData))
+        clearCart()
+        closeModal(true)
+    };
 
     return (
         <Modal isOpen={modalIsOpen}
@@ -78,7 +96,7 @@ const CartModal = ({totalPrice, clearCart, modalIsOpen, closeModal}) => {
                                 ?
                                 <div>
                                     <p><span>Address: </span>{currentUser.address}</p>
-                                    <p><span>Estimated delivery date: </span>{displayDate}</p>
+                                    <p><span>Estimated delivery date: </span>{to}</p>
                                 </div>
                                 :
                                 <NavLink to={`/${currentUser._id}/edit`}><i className="bi bi-pencil-fill"></i> Add address in your profile</NavLink>
@@ -94,8 +112,9 @@ const CartModal = ({totalPrice, clearCart, modalIsOpen, closeModal}) => {
                                         { name: "Cash on delivery", value: "cash" }
                                     ]}
                                     name="payment"
-                                    // onChange={handleChange}
+                                    onChange={handleChange}
                                     label="Choose a payment method"
+                                    value={payment}
                                 />
                             </form>
                         </div>
@@ -104,10 +123,10 @@ const CartModal = ({totalPrice, clearCart, modalIsOpen, closeModal}) => {
                     <div className={CssClasses.RESULT}>
                         <h3 className={CssClasses.SUBTITLE}>Total cost</h3>
                         <p><span>Purchase amount: </span>{totalPrice}₽</p>
-                        <p><span>With discount: </span>{afterDiscount}₽</p>
+                        <p><span>With discount: </span>{(totalPrice * (100-discount))/100}₽</p>
                         <p><span>Delivery cost: </span> {DELIVERY_COST}₽</p>
-                        <h4 className={CssClasses.PRICE}>Final price: {afterDiscount + DELIVERY_COST}₽</h4>
-                        <button className={CssClasses.CHECKOUT}>
+                        <h4 className={CssClasses.PRICE}>Final price: {(totalPrice * (100-discount))/100 + DELIVERY_COST}₽</h4>
+                        <button className={CssClasses.CHECKOUT} onClick={(e) => submitCart(e)}>
                             Checkout
                             <i className="bi bi-bag-fill"></i>
                         </button>
@@ -125,6 +144,7 @@ const CartModal = ({totalPrice, clearCart, modalIsOpen, closeModal}) => {
             }
 
         </Modal>
+
     );
 };
 

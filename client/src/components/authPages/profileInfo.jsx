@@ -4,9 +4,10 @@ import OrderCard from "./orderCard";
 
 const ProfileInfo = ({user}) => {
     const navigate = useNavigate();
-    // const user = useSelector(getCurrentUserData());
-    console.log("user.orders", user.orders)
-
+    let ordersArray = user ? [...user.orders] : []
+    if (ordersArray.length > 3 ) {
+        ordersArray = ordersArray.slice(0,3)
+    }
     const handleClick = () => {
         const path = `/${user._id}/edit`
         navigate(path, { replace: true });
@@ -37,15 +38,15 @@ const ProfileInfo = ({user}) => {
 
                     <div>
                         <div>
-                            <h2>Your orders</h2>
+                            <h2>Your last orders</h2>
                             { user.orders && user.orders.length !== undefined
                                 ? <div>
                                     <ul>
-                                        {user.orders.map((data, index) => (
-                                            <li><OrderCard data={data} index={index}/></li>
+                                        {ordersArray.reverse().map((data) => (
+                                            <li><OrderCard data={data}/></li>
                                         ))}
-
                                     </ul>
+                                    {user.orders.length > 3 ? <p>All orders</p> : ""}
                                 </div>
                                 : <p>You have no orders! Start <Link to="/shop">shopping</Link> now.</p>
                             }

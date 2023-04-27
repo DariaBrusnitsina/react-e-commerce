@@ -35,8 +35,8 @@ function App() {
             </AppLoader>
 
           </CartProvider>
+          <ToastContainer position="bottom-right" newestOnTop />
           <Footer/>
-          {/*<ToastContainer />*/}
       </div>
 
   );
