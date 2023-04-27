@@ -51,10 +51,10 @@ const Home = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-arrow-down" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
                         </svg>
-                        <Link to="/react-e-commerce/about">Continue The Story</Link>
+                        <Link to="/about">Continue The Story</Link>
                     </div>
                 </div>
-                <img alt="about" src="./../assets/about.jpeg" width={470}/>
+                <img alt="about" src="https://sun9-38.userapi.com/impg/aSV7u-I1cEnii4hizZqoizl8wu9CVfYqkexZKg/673sCjPNW6U.jpg?size=1201x1600&quality=95&sign=0c10ee25414f60b6df6887882432de88&type=album" width={470}/>
             </section>
 
             <section className="featured" id="featured">

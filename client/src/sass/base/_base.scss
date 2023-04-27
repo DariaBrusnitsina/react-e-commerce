@@ -6,6 +6,12 @@ $gray: #8f8f8f;
 body {
   font-family: 'Poppins', sans-serif;
   background: #F5F5F5;
+  scroll-behavior: smooth;
+}
+
+.body {
+  position: relative;
+  min-height: 100vh;
 }
 
 .container {

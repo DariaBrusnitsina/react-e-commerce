@@ -1,3 +1,19 @@
 .about {
-    margin-top: 100px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 5%;
+
+    p {
+        text-align: start;
+        line-height: 120%;
+    }
+}
+
+.about__list {
+    margin-top: 50px;
+    list-style: unset;
+    li {
+        padding: 15px 0;
+    }
 }

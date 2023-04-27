@@ -2,10 +2,6 @@ $panel: #dbd6d0;
 $accent: #81b4e5;
 $gray: #8f8f8f;
 
-.cart {
-  margin-top: 60px;
-}
-
 .cart__wrapper {
   display: flex;
   justify-content: space-between;
@@ -34,7 +30,6 @@ $gray: #8f8f8f;
   grid-template-columns: 1fr 2fr 1fr 1fr;
   grid-column-gap: 10px;
   align-items: center;
-  box-shadow: 2px 2px 5px $gray;
 
   img {
     border-bottom-left-radius: 10px;

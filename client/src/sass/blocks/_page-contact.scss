@@ -1,3 +1,56 @@
+$accent: #81b4e5;
+$panel: #dbd6d0;
+
 .contact {
     margin-top: 60px;
+    display: flex;
+    column-gap: 20%;
+}
+
+.contact__name {
+    position: relative;
+    font-size: 80px;
+    font-weight: 900;
+
+    &::before {
+        background-image: url("../../assets/contact.png");
+        background-size: cover;
+        position: absolute;
+        content: "";
+        z-index: -12;
+        width: 900px;
+        height: 800px;
+        top: -200px;
+        left: -60%;
+    }
+}
+
+.contact__list {
+    background:$panel;
+    padding: 25px;
+
+    h2 {
+        font-size: 30px;
+        font-weight: 900;
+    }
+
+    ul {
+        margin-top: 50px;
+    }
+
+    li {
+        font-size: 25px;
+        margin: 20px 0;
+
+        i {
+            font-size: 30px;
+            color: $accent;
+            transition: all 0.3s ease-in;
+
+            &:hover {
+                color: #0b0a0a;
+                transition: all 0.3s ease-in;
+            }
+        }
+    }
 }

@@ -13,10 +13,11 @@ import AppLoader from "./hoc/appLoader";
 import Profile from "./components/authPages/profile";
 import LogOut from "./components/authPages/logOut";
 import { ToastContainer } from 'react-toastify';
+import Footer from "./components/common/footer";
 
 function App() {
   return (
-      <div>
+      <div className="body">
           <CartProvider>
             <AppLoader>
 
@@ -34,7 +35,8 @@ function App() {
             </AppLoader>
 
           </CartProvider>
-          <ToastContainer />
+          <Footer/>
+          {/*<ToastContainer />*/}
       </div>
 
   );

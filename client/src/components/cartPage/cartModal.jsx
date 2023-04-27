@@ -3,7 +3,9 @@ import {useSelector} from "react-redux";
 import {getCurrentUserData} from "../../store/users";
 import LoginForm from "../authPages/loginForm";
 import Modal from 'react-modal';
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
+import RadioField from "../common/form/radioField";
+import {getDiscount} from "../../utils/getDiscount";
 
 const customStyles = {
     content: {
@@ -26,15 +28,16 @@ const CssClasses = {
     INFO:"cart-modal__auth-info",
     LOGIN: "cart-modal__auth-login",
     SUBTITLE: "cart-modal__subtitle",
-    PART: "cart-modal__part",
+    DATA: "cart-modal__data",
+    RESULT: "cart-modal__result",
     RADIO: "cart-modal__radio",
-    CHECKOUT: "button-submit"
+    CHECKOUT: "button-submit",
+    PRICE: "cart-modal__result-price",
 }
 
 const CartModalTexts = {
     UNAUTHORIZED: "To place an order, you need to log in to the system",
     SUBTITLE: "Voluptate nulla atque minus dolores quas minima doloremque.",
-    DELIVERY_TEXT: "Estimated delivery date: ",
 }
 
 const CartModal = ({totalPrice, clearCart, modalIsOpen, closeModal}) => {
@@ -44,6 +47,10 @@ const CartModal = ({totalPrice, clearCart, modalIsOpen, closeModal}) => {
     const options = { weekday: 'long', month: 'long', day: 'numeric' }
     const displayDate = date.toLocaleDateString('en-EN', options)
     const currentUser = useSelector(getCurrentUserData());
+
+    const discount = getDiscount(currentUser)
+    const afterDiscount = (totalPrice * (100-discount))/100
+
 
 
     return (
@@ -56,54 +63,55 @@ const CartModal = ({totalPrice, clearCart, modalIsOpen, closeModal}) => {
             {currentUser
                 ?
                 <div className={CssClasses.MODAL}>
-                    <div className={CssClasses.PART}>
-                        <h3 className={CssClasses.SUBTITLE}>1. Contact information</h3>
-                        <p>Name: {currentUser.name}</p>
-                        <p>Surname: {currentUser.surname}</p>
-                        <p>Email: {currentUser.email}</p>
-                        <p>Phone: {currentUser.phone}</p>
-                    </div>
+                    <div className={CssClasses.DATA}>
+                        <div>
+                            <h3 className={CssClasses.SUBTITLE}>1. Contact information</h3>
+                            <p><span>Name: </span>{currentUser.name}</p>
+                            <p><span>Surname: </span>{currentUser.surname}</p>
+                            <p><span>Email: </span>{currentUser.email}</p>
+                            <p><span>Phone: </span>{currentUser.phone}</p>
+                        </div>
 
+                        <div>
+                            <h3 className={CssClasses.SUBTITLE}>2. Delivery</h3>
+                            {currentUser.address.length
+                                ?
+                                <div>
+                                    <p><span>Address: </span>{currentUser.address}</p>
+                                    <p><span>Estimated delivery date: </span>{displayDate}</p>
+                                </div>
+                                :
+                                <NavLink to={`/${currentUser._id}/edit`}><i className="bi bi-pencil-fill"></i> Add address in your profile</NavLink>
+                            }
+                        </div>
 
-                    <div className={CssClasses.PART}>
-                        <h3 className={CssClasses.SUBTITLE}>2. Delivery</h3>
-                        {currentUser.address.length
-                            ?
-                            <div>
-                                <p>Address: {currentUser.address}</p>
-                                <p>{CartModalTexts.DELIVERY_TEXT}{displayDate}</p>
-                            </div>
-                            :
-                            <p>EDIT</p>}
-
-                    </div>
-
-                    <div className={CssClasses.PART}>
-                        <h3 className={CssClasses.SUBTITLE}>3. Payment Methods</h3>
-                        <div className={CssClasses.RADIO}>
-                            <input type="radio" id="online"
-                                   name="contact" value="online"/>
-                            <label htmlFor="online">Online payment</label>
-
-                            <input type="radio" id="receipt"
-                                       name="contact" value="receipt"/>
-                            <label htmlFor="receipt">Payment upon receipt in cash or by card</label>
+                        <div>
+                            <h3 className={CssClasses.SUBTITLE}>3. Payment Methods</h3>
+                            <form action="">
+                                <RadioField
+                                    options={[
+                                        { name: "Debit/Credit card", value: "card" },
+                                        { name: "Cash on delivery", value: "cash" }
+                                    ]}
+                                    name="payment"
+                                    // onChange={handleChange}
+                                    label="Choose a payment method"
+                                />
+                            </form>
                         </div>
                     </div>
 
-                    <div className={CssClasses.PART}>
-                        <h3 className={CssClasses.SUBTITLE}>3. Total cost</h3>
-                        <p>Purchase amount: {totalPrice}₽</p>
-                        <p>Delivery cost: {DELIVERY_COST}₽</p>
-                        <p>Amount of discount:</p>
-                        <p>Final price: {totalPrice + DELIVERY_COST}</p>
+                    <div className={CssClasses.RESULT}>
+                        <h3 className={CssClasses.SUBTITLE}>Total cost</h3>
+                        <p><span>Purchase amount: </span>{totalPrice}₽</p>
+                        <p><span>With discount: </span>{afterDiscount}₽</p>
+                        <p><span>Delivery cost: </span> {DELIVERY_COST}₽</p>
+                        <h4 className={CssClasses.PRICE}>Final price: {afterDiscount + DELIVERY_COST}₽</h4>
                         <button className={CssClasses.CHECKOUT}>
                             Checkout
                             <i className="bi bi-bag-fill"></i>
-
                         </button>
                     </div>
-
                 </div>
                 :
                 <div className={CssClasses.AUTH}>
