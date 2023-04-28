@@ -8,7 +8,7 @@ import SortButton from "./sortButton";
 import {useDispatch, useSelector} from "react-redux";
 import {getItems} from "../../store/items";
 import {getCategories} from "../../store/categories";
-import SkeletonShop from "./skeletonShop";
+import SkeletonShop from "../skeleton/skeletonShop";
 
 const ShopPage = () => {
     const [currentPage, setCurrentPage] = useState(1);

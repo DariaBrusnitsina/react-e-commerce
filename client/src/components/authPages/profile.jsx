@@ -4,6 +4,8 @@ import {getCurrentUserData} from "../../store/users";
 import {useParams} from "react-router-dom";
 import ProfileInfo from "./profileInfo";
 import ProfileEdit from "./profileEdit";
+import OrdersList from "./ordersPage";
+
 
 const Profile = () => {
     const currentUser = useSelector(getCurrentUserData());

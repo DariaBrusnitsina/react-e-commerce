@@ -1,7 +1,13 @@
-import React, {useEffect, useState} from "react";
-import { Link } from "react-router-dom";
-import {useCart} from "../../hooks/useCart";
-import OrderItem from "./orderItem";
+import React from "react";
+
+import CartItem from "../common/itemCard";
+
+const CssClasses = {
+    SUBTITLE: "profile__subtitle",
+    ITEM: "order-item",
+    FORM: "profile__form-element"
+
+}
 
 const OrderCard = ( {data} ) => {
     let totalPrice = 0
@@ -16,26 +22,23 @@ const OrderCard = ( {data} ) => {
     data.cart.map((item) => (
         totalPrice = totalPrice + (item.counter * item.item.price)
     ))
-
     const index = new Date(data.from)
-    console.log(Date.parse(index))
 
     return (
-        <>
-            <div className="orders-list">
-                <p>Order №{Date.parse(index)}</p>
+            <div className={CssClasses.ITEM}>
+                <h3 className={CssClasses.SUBTITLE}>Order №{Date.parse(index)}</h3>
                 {data.cart.map((item) => (
-                    <OrderItem data={item}/>
+                    <CartItem data={item} size="small"/>
                 ))}
                 <div className="orders-info">
-                    <p>Totally: {totalPrice}₽</p>
+                    <p className={CssClasses.FORM}><span>Totally:</span> {totalPrice}₽</p>
                     <div>
-                        <p><i className={icon}></i>{status}{data.to}</p>
+                        <p className={CssClasses.FORM}><i className={icon}></i><span>{status}</span>{data.to}</p>
                     </div>
                 </div>
 
             </div>
-        </>
+
     );
 };
 

@@ -1,10 +1,14 @@
 import React from "react";
 
-const CategoryCard = () => {
+const CssClasses = {
+    CARD: "categories__card"
+}
+
+const CategoryCard = ({item}) => {
     return (
-    <div className="home__categories--card">
-        <p>Pialas</p>
-    </div>
+        <div className={CssClasses.CARD} style={{'backgroundImage': `url(${item.url})`}}>
+            <p>{item.name}</p>
+        </div>
     );
 };
 

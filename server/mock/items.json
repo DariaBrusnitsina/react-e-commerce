@@ -61,4 +61,12 @@
   "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
   "category": "dnp9pdq38ekov42n",
   "price": 1200
-}]
+},
+  {
+    "_id": "dk7e3dsprnk39xw8",
+    "name": "Teapot Red Forest",
+    "url": "https://sun9-62.userapi.com/impg/5RdIPZHhfAI0ooQRsUph6AXjW6rolBy45-A7ow/Mpchl6Ne8a8.jpg?size=1440x1440&quality=95&sign=58b6d30b5571388bcc8b0c5b5f2d4601&type=album",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "category": "dnp9pdq3s35e6a2o",
+    "price": 4200
+  }]

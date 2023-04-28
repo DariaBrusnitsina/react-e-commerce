@@ -28,3 +28,10 @@ $error: #ca646f;
   color: white !important;
   cursor: default;
 }
+
+.arrow--btn {
+  display: flex;
+  align-items: center;
+  padding-top: 110px;
+  column-gap: 10px;
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CartItem from "./cartItem";
+import CartItem from "../common/itemCard";
 import { useCart } from "../../hooks/useCart";
 import {getCurrentUserData, updateUserData} from "../../store/users";
 import {useDispatch, useSelector} from "react-redux";
@@ -38,7 +38,7 @@ const Cart = () => {
                     <div className={CssClasses.WRAPPER}>
                         <div>
                             {cart.map((data) => (
-                                <CartItem data={data}/>
+                                <CartItem data={data} size="large"/>
                             ))}
                         </div>
 

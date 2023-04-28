@@ -8,7 +8,7 @@ const ItemCard = ( {item, width, display}) => {
     return (
     <div key={item._id} className="shop-item">
         <NavLink key={item._id} to={`${item._id}`}>
-            <img src={item.url} alt="Card cap" width={"270px;"}/>
+            <img src={item.url} alt="Card cap" width={width}/>
         </NavLink>
         <div className="shop-item__text" width={width}>
             <NavLink key={item._id} to={`${item._id}`} style={{color: "black", textDecoration: 'none'}}>

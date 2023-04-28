@@ -1,75 +1,86 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import CategoryCard from "../shopPages/categoryCard";
 import ItemCard from "../shopPages/itemCard";
 import {useSelector} from "react-redux";
 import {getItems} from "../../store/items";
 import {HomePageTexts} from "../../content/texts";
+import SkeletonHomeFirst from "../skeleton/skeletonHomeFirst";
+import SkeletonHomeSecond from "../skeleton/skeletonHomeSecond";
+import {getCategories} from "../../store/categories";
+import Slider from "../common/slider";
+import SkeletonCategories from "../skeleton/skeletonCategories";
+import ArrowBtn from "../common/arrowButton";
 
 const CssClasses = {
     HEADER: "home__header",
-    HEADER_TEXT: "home__header--text"
+    HEADER_TEXT: "home__header--text",
+    CATEGORIES: "home__categories",
+    ABOUT: "about",
+    ABOUT_TEXT: "about__text",
+    ABOUT_TITLE: "about__title",
+    ABOUT_SUBTITLE: "about__subtitle",
+    ABOUT_DESCRIPTION: "about__description",
+    FEATURED: "featured",
+    FEATURED_TEXT: "featured__text",
 }
 
 const Home = () => {
     const items = useSelector(getItems());
+    const categories = useSelector(getCategories())
 
     return (
     <>
         <header className={CssClasses.HEADER}>
             <div className="container">
                 <div className={CssClasses.HEADER_TEXT}>
-                    <h1>{HomePageTexts.TITLE}</h1>
-                    <p>{HomePageTexts.SUBTITLE}</p>
-                    <div className="arrow--btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-arrow-down" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
-                        </svg>
-                        <a href="#featured">{HomePageTexts.HEADER_BTN}</a>
-                    </div>
+                    <h1>{HomePageTexts.HEADER_TITLE}</h1>
+                    <p>{HomePageTexts.HEADER_SUBTITLE}</p>
+                    <ArrowBtn text="Explore Collection" color="white" link="#featured"/>
                 </div>
             </div>
         </header>
 
         <div className="container">
-            <section className="home__categories">
-                <h2>Categories</h2>
-                <div className="home__categories--row">
-                    <CategoryCard/>
-                    <CategoryCard />
-                    <CategoryCard />
-                </div>
-
+            <section className={CssClasses.CATEGORIES}>
+                <h2>{HomePageTexts.CATEGORIES}</h2>
+                    {categories ? <Slider array={categories} /> : <SkeletonCategories/>}
             </section>
 
-            <section className="home__about">
-                <div className="home__about--text">
-                    <p className="home__about--section-name">About</p>
-                    <div className="home__about--title"><h2 >Lorem, ipsum dolor sit 2012</h2></div>
-                    <p className="home__about--discription">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Placeat, asperiores ex, aperiam nesciunt maiores minima sunt eum eligendi quo illum esse vel impedit repudiandae recusandae. Labore, at! Perspiciatis, aspernatur tempore!</p>
-                    <div className="arrow--btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-arrow-down" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
-                        </svg>
-                        <Link to="/about">Continue The Story</Link>
-                    </div>
+            <section className={CssClasses.ABOUT}>
+                <div className={CssClasses.ABOUT_TEXT}>
+                    <p className={CssClasses.ABOUT_TITLE}>{HomePageTexts.ABOUT}</p>
+                    <div className={CssClasses.ABOUT_SUBTITLE}><h2>{HomePageTexts.ABOUT_SUBTITLE}</h2></div>
+                    <p className={CssClasses.ABOUT_DESCRIPTION}>{HomePageTexts.ABOUT_DESCRIPTION}</p>
+                    <ArrowBtn text="Continue The Story" color="black" link="/about"/>
                 </div>
                 <img alt="about" src="https://sun9-38.userapi.com/impg/aSV7u-I1cEnii4hizZqoizl8wu9CVfYqkexZKg/673sCjPNW6U.jpg?size=1201x1600&quality=95&sign=0c10ee25414f60b6df6887882432de88&type=album" width={470}/>
             </section>
 
-            <section className="featured" id="featured">
-                <div className="featured-column-1">
-                    {items && <ItemCard item={items[0]} width={370} display="none"/>}
-                    {items && <ItemCard item={items[5]} width={570} display="none"/>}
-
+            <section className={CssClasses.FEATURED} id="featured">
+                <div>
+                    {items ?
+                        <div>
+                            <ItemCard item={items[0]} width={370} display="none"/>
+                            <ItemCard item={items[5]} width={570} display="none"/>
+                        </div>
+                        :
+                        <SkeletonHomeFirst/>
+                    }
                 </div>
-                <div className="featured-column-2">
-                    <div className="featured-text">
-                        <h3>Featured Products</h3>
-                        <p>Accusantium consequuntur possimus perspiciatis laboriosam dicta aliquid, in veritatis illum dolorum ullam blanditiis sequi voluptas omnis? Saepe suscipit laboriosam fuga corporis aliquam.</p>
+
+                <div>
+                    <div className={CssClasses.FEATURED_TEXT}>
+                        <h3>{HomePageTexts.FEATURED}</h3>
+                        <p>{HomePageTexts.FEATURED_TEXT}</p>
                     </div>
-                    {items && <ItemCard  item={items[3]} width={470} display="none"/>}
-                    {items && <ItemCard  item={items[6]} width={350} display="none"/>}
+
+                    {items ?
+                        <div>
+                            <ItemCard item={items[3]} width={470} display="none"/>
+                            <ItemCard item={items[6]} width={350} display="none"/>
+                        </div>
+                        :
+                        <SkeletonHomeSecond/>
+                    }
                 </div>
             </section>
         </div>

@@ -1,5 +1,4 @@
 import './sass/main.scss';
-// import './sass/App.scss';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/layouts/home';
 import About from './components/layouts/about';
@@ -14,6 +13,7 @@ import Profile from "./components/authPages/profile";
 import LogOut from "./components/authPages/logOut";
 import { ToastContainer } from 'react-toastify';
 import Footer from "./components/common/footer";
+
 
 function App() {
   return (
@@ -35,7 +35,6 @@ function App() {
             </AppLoader>
 
           </CartProvider>
-          <ToastContainer position="bottom-right" newestOnTop />
           <Footer/>
       </div>
 
