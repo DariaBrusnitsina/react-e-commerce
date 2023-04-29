@@ -9,11 +9,9 @@ import AuthPage from './components/authPage/authPage';
 import NavBar from './components/common/navBar';
 import { CartProvider } from './hooks/useCart';
 import AppLoader from "./hoc/appLoader";
-import Profile from "./components/profilePage/profile";
 import LogOut from "./components/authPage/logOut";
-import { ToastContainer } from 'react-toastify';
 import Footer from "./components/common/footer";
-
+import ProfilePage from "./components/profilePage/profilePage";
 
 function App() {
   return (
@@ -29,7 +27,7 @@ function App() {
               <Route path="/contact" element={<Contact />}/>
               <Route path="/cart" element={<Cart />}/>
               <Route path="/login" element={<AuthPage />}/>
-              <Route path="/:userId?/:edit?" element={<Profile />}/>
+              <Route path="/:userId?/:edit?" element={<ProfilePage />}/>
               <Route path="/logout" element={<LogOut />} />
             </Routes>
             </AppLoader>

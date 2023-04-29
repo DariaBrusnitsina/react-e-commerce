@@ -3,11 +3,14 @@ import { useSelector } from "react-redux";
 import {getCurrentUserData} from "../../store/users";
 import {useParams} from "react-router-dom";
 import ProfileInfo from "./profileInfo";
-import ProfileEdit from "./profileEdit";
-import OrdersList from "./profileOrdersPage";
+import ProfileEdit from "./editForm";
 
+const CssClasses = {
+    AUTH: "auth_page",
+    CARD: "auth_page__card"
+}
 
-const Profile = () => {
+const ProfilePage = () => {
     const currentUser = useSelector(getCurrentUserData());
     const params = useParams();
     const { userId, edit } = params;
@@ -16,7 +19,11 @@ const Profile = () => {
         <>
         {userId ? (
                 edit ? (
-                    <ProfileEdit user={currentUser}/>
+                    <div className={CssClasses.AUTH}>
+                        <div className={CssClasses.CARD}>
+                            <ProfileEdit user={currentUser}/>
+                        </div>
+                    </div>
                 ) : (
                     <ProfileInfo user={currentUser} />
                 )
@@ -27,4 +34,4 @@ const Profile = () => {
     )
 };
 
-export default Profile;
+export default ProfilePage;
