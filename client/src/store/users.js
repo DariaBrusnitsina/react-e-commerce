@@ -99,7 +99,6 @@ export const login =
                 localStorageService.setTokens(data);
                 dispatch(authRequestSuccess({ userId: data.userId }));
             } catch (error) {
-                console.log(error)
                 const { code, message } = error.response.data.error;
                 if (code === 400) {
                     const errorMessage = generateAuthError(message);

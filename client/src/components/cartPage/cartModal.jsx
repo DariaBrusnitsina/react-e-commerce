@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentUserData, updateUserData} from "../../store/users";
-import LoginForm from "../authPage/loginForm";
+import LoginForm from "../AuthLayout/loginForm";
 import Modal from 'react-modal';
 import {Link, NavLink} from "react-router-dom";
 import RadioField from "../common/form/radioField";

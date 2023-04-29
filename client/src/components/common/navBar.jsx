@@ -31,7 +31,7 @@ const NavBar = () => {
                         <li><NavProfile className={CssClasses.ITEM} to="login">Login</NavProfile></li>
                     )
                     : (
-                        <li><NavLink className={CssClasses.ITEM} to="login">Login</NavLink></li>
+                        <li><NavLink className={CssClasses.ITEM} to="auth/login">Login</NavLink></li>
                     )}
             </ul>
         </nav>

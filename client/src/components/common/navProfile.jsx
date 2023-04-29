@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { getCurrentUserData } from "../../store/users";
+import {useDispatch, useSelector} from "react-redux";
+import {getCurrentUserData, logOut} from "../../store/users";
 import {ClipLoader} from "react-spinners";
+import localStorageService from "../../services/localStorage.service";
 
 const override = {
     margin: "0 21px"
@@ -10,13 +11,20 @@ const override = {
 
 function NavProfile() {
     const currentUser = useSelector(getCurrentUserData());
+    const token = localStorageService.getAccessToken()
+    const dispatch = useDispatch();
+
+    if (token === "undefined") {
+        localStorageService.removeAuthData()
+        dispatch(logOut());
+    }
 
     const [isOpen, setOpen] = useState(false);
     const toggleMenu = () => {
         setOpen((prevState) => !prevState);
     };
-    if (!currentUser) return <ClipLoader color="#000000" size={20} cssOverride={override}/>
 
+    if (!currentUser) return <ClipLoader color="#000000" size={20} cssOverride={override}/>
 
     return (
         <div className="dropdown" onClick={toggleMenu}>
@@ -28,12 +36,12 @@ function NavProfile() {
             <div className={"dropdown-menu" + (isOpen ? " show" : "")}>
                 <Link
 
-                    to={`/${currentUser._id}`}
+                    to={`/profile`}
                     className="dropdown-item"
                 >
                     Profile
                 </Link>
-                <Link to="/logout" className="dropdown-item">
+                <Link to="/auth/logout" className="dropdown-item">
                     Log Out
                 </Link>
             </div>

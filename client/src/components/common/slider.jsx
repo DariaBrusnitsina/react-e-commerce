@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import CategoryCard from "../shopPage/categoryCard";
+import CategoryCard from "../ShopLayout/categoryCard";
 
 const CssClasses = {
     SLIDER: "slider",
