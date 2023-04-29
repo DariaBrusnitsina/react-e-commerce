@@ -1,0 +1,28 @@
+$accent: #81b4e5;
+$error: #ca646f;
+
+// authPage
+.auth_page {
+  display: flex;
+  justify-content: center;
+
+  .title {
+    padding: 0;
+  }
+}
+
+.auth_page__card {
+  width: 400px;
+  margin: 20px 0 100px 0;
+  padding: 50px;
+  background: rgba(196, 196, 196, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.auth_page__text-danger {
+  color: $error;
+  margin: 10px 0;
+  line-height: 120%;
+}
+

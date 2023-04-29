@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {useCart} from "../../hooks/useCart";
 
 const CssClassesLarge = {
@@ -44,7 +44,8 @@ const ItemCard = ( {data, size} ) => {
                     {isLarge && <img src={data.item.url}  width={150}/>}
 
                     <div className={isLarge ? CssClassesLarge.TITLE : CssClassesSmall.TITLE}>
-                        <Link to={`/shop/${data.item._id}`}><p>{data.item.name}</p></Link>
+                        {isLarge ? <NavLink to={`/shop/${data.item._id}`}><p>{data.item.name}</p></NavLink> : <p>{data.item.name}</p>}
+
                     </div>
 
                     <div className={isLarge ? CssClassesLarge.COUNTER : CssClassesSmall.COUNTER}>

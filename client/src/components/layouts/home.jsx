@@ -1,5 +1,5 @@
 import React from "react";
-import ItemCard from "../shopPages/itemCard";
+import ProductCard from "../common/productCard";
 import {useSelector} from "react-redux";
 import {getItems} from "../../store/items";
 import {HomePageTexts} from "../../content/texts";
@@ -59,8 +59,8 @@ const Home = () => {
                 <div>
                     {items ?
                         <div>
-                            <ItemCard item={items[0]} width={370} display="none"/>
-                            <ItemCard item={items[5]} width={570} display="none"/>
+                            <ProductCard item={items[0]} width={370} display="none"/>
+                            <ProductCard item={items[5]} width={570} display="none"/>
                         </div>
                         :
                         <SkeletonHomeFirst/>
@@ -75,8 +75,8 @@ const Home = () => {
 
                     {items ?
                         <div>
-                            <ItemCard item={items[3]} width={470} display="none"/>
-                            <ItemCard item={items[6]} width={350} display="none"/>
+                            <ProductCard item={items[3]} width={470} display="none"/>
+                            <ProductCard item={items[6]} width={350} display="none"/>
                         </div>
                         :
                         <SkeletonHomeSecond/>

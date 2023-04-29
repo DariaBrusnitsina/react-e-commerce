@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentUserData, updateUserData} from "../../store/users";
-import LoginForm from "../authPages/loginForm";
+import LoginForm from "../authPage/loginForm";
 import Modal from 'react-modal';
 import {Link, NavLink} from "react-router-dom";
 import RadioField from "../common/form/radioField";
@@ -65,7 +65,6 @@ const CartModal = ({totalPrice, modalIsOpen, closeModal, cart}) => {
         let cartArray = newData.orders
         newData.orders = [...cartArray, {cart, from, to, payment}]
         newData.sale = getDiscount(newData) > 15 ? 15 : getDiscount(newData)
-        console.log(newData)
         dispatch(updateUserData(newData))
         clearCart()
         closeModal(true)

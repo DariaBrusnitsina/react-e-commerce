@@ -1,31 +1,41 @@
 import React, { useState } from "react";
 
+const CssClasses = {
+    LABEL: "input-label",
+    FIELD: "input-field",
+    NULL: "input-group is-null",
+    INVALID: "input-group is-invalid",
+    VALID: "input-group",
+    EYE: "eye-btn",
+    FEEDBACK: "invalid-feedback"
+}
+
 const TextField = ({ label, type, name, value, onChange, error }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = ({ target }) => {
         onChange({ name: target.name, value: target.value });
     };
+
     const getInputClasses = () => {
         if (error) {
-
             if (!value) {
-                return "input-group" + " is-null"
+                return CssClasses.NULL
             } else {
-                return "input-group" + " is-invalid"
+                return CssClasses.INVALID
             }
         } else {
-            return "input-group"
+            return CssClasses.VALID
         }
-
-        return "input-group" + (error ? " is-invalid" : "");
     };
+
     const toggleShowPassword = () => {
         setShowPassword((prevState) => !prevState);
     };
+
     return (
         <div className={getInputClasses()}>
-            <label className="input-label" htmlFor={name}>{label}</label>
+            <label className={CssClasses.LABEL} htmlFor={name}>{label}</label>
             <div>
                 <input
                     type={showPassword ? "text" : type}
@@ -33,11 +43,11 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
                     name={name}
                     value={value}
                     onChange={handleChange}
-                    className="input-field"
+                    className={CssClasses.FIELD}
                 />
                 {type === "password" && (
                         <button
-                            className="eye-btn"
+                            className={CssClasses.EYE}
                             type="button"
                             onClick={toggleShowPassword}
                         >
@@ -48,7 +58,7 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
                             ></i>
                         </button>
                 )}
-                {error && <div className="invalid-feedback">{error}</div>}
+                {error && <div className={CssClasses.FEEDBACK}>{error}</div>}
             </div>
         </div>
     );

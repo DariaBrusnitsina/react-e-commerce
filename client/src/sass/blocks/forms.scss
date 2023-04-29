@@ -1,0 +1,100 @@
+$accent: #81b4e5;
+$error: #ca646f;
+
+//Button
+.button-wrapper--center {
+  text-align: center;
+}
+
+.button-submit {
+  margin: 20px 0;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  background-color: $accent;
+  transition: all 0.3s ease-in;
+  font-weight: 500;
+  font-size: 20px;
+
+  i {
+    margin-left: 10px;
+  }
+
+  &:hover{
+    color: $accent;
+    background-color: white;
+    transition: all 0.3s ease-in;
+  }
+
+}
+
+.invalid-form {
+  background: $error !important;
+  color: white !important;
+  cursor: default;
+}
+
+// Fields
+.input-group {
+  position: relative;
+  margin: 60px 0 40px 0;
+}
+
+.is-null  {
+  .input-field {
+    border-bottom-color: $error;
+  }
+
+  .input-label {
+    color: $error;
+    transform: translateY(25px);
+  }
+}
+
+.is-invalid  {
+  .input-field {
+    border-bottom-color: $error;
+  }
+
+  .input-label {
+    color: $error;
+  }
+}
+
+.input-label {
+  color: $accent;
+  position: absolute;
+  bottom: 30px;
+  transition: .25s ease;
+  z-index: -1;
+}
+
+.input-field {
+  width: 100%;
+  border: 0;
+  z-index: 1;
+  background-color: transparent;
+  outline: none;
+  border-bottom: 2px solid $accent;
+  font: inherit;
+  font-size: 15px;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.invalid-feedback {
+  position: absolute;
+  color: $error;
+  bottom: -1.5rem;
+}
+
+.invalid-feedback--checkbox {
+  margin: 10px;
+  color: $error;
+
+}

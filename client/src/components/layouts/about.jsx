@@ -2,10 +2,10 @@ import React from "react";
 import {AboutPageTexts} from "../../content/texts";
 
 const CssClasses = {
-    ABOUT: "about",
+    ABOUT: "about-page",
     TITLE: "title",
     SUBTITLE: "subtitle",
-    LIST: "about__list"
+    LIST: "about-page__list"
 }
 
 const About = () => {
