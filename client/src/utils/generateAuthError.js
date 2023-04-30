@@ -1,11 +1,13 @@
 function generateAuthError(message) {
     switch (message) {
-        case "INVALID_PASSWORD":
-            return "Email или пароль введены некорректно";
-        case "EMAIL_EXISTS":
-            return "Пользователь с таким Email уже существует";
+        case "INVALID PASSWORD":
+            return "Password is incorrect";
+        case "EMAIL NOT FOUND":
+            return "Email address not found";
+        case "EMAIL EXISTS":
+            return "A user with that email address already exists";
         default:
-            return "Слишком много попыток входа. Попробуйте позже";
+            return "An unknown error occurred. Please try again.";
     }
 }
 

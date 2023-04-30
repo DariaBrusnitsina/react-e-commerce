@@ -118,8 +118,14 @@ export const signUp = (payload) =>
                 dispatch(authRequestSuccess({ userId: data.userId }));
 
             } catch (error) {
-                console.log(error)
-                dispatch(authRequestFailed(error.message));
+                const { code, message } = error.response.data.error;
+                console.log(message)
+                if (code === 400) {
+                    const errorMessage = generateAuthError(message);
+                    dispatch(authRequestFailed(errorMessage));
+                } else {
+                    dispatch(authRequestFailed(error.message));
+                }
             }
         };
 

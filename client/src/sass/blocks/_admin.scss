@@ -1,0 +1,18 @@
+.admin-page {
+  margin-top: 20px;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    column-gap: 20em;
+
+  }
+
+  li {
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    column-gap: 20px;
+  }
+}

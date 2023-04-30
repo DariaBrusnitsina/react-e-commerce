@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentUserData, updateUserData} from "../../store/users";
 import LoginForm from "../AuthLayout/loginForm";
@@ -30,10 +30,12 @@ const CssClasses = {
     LOGIN: "cart-modal__auth-login",
     SUBTITLE: "cart-modal__subtitle",
     DATA: "cart-modal__data",
+    CENTER: "button-wrapper--center",
     RESULT: "cart-modal__result",
     RADIO: "cart-modal__radio",
-    CHECKOUT: "button-submit",
     PRICE: "cart-modal__result-price",
+    BTN_VALID: "button-submit",
+    BTN_INVALID: "button-submit invalid-form",
 }
 
 const CartModalTexts = {
@@ -53,10 +55,22 @@ const CartModal = ({totalPrice, modalIsOpen, closeModal, cart}) => {
     date.setDate((date.getDate() + 3))
     const to = date.toLocaleDateString('en-EN', options)
     const discount = currentUser ?  getDiscount(currentUser) : 0
+    let isValid = true
 
     const handleChange = (target) => {
         setPayment(target.value)
     }
+
+    if (!currentUser.address.length || payment === null) {
+        isValid = false
+    }
+
+    useEffect(() => {
+        if (!currentUser.address.length || payment === null) {
+            isValid = false
+        }
+    }, [payment, currentUser.address.length]);
+
 
     const submitCart = async (e) => {
         e.preventDefault();
@@ -72,7 +86,6 @@ const CartModal = ({totalPrice, modalIsOpen, closeModal, cart}) => {
 
     return (
         <Modal isOpen={modalIsOpen}
-            // onAfterOpen={afterOpenModal}
                onRequestClose={closeModal}
                style={customStyles}
         >
@@ -98,7 +111,7 @@ const CartModal = ({totalPrice, modalIsOpen, closeModal, cart}) => {
                                     <p><span>Estimated delivery date: </span>{to}</p>
                                 </div>
                                 :
-                                <NavLink to={`/${currentUser._id}/edit`}><i className="bi bi-pencil-fill"></i> Add address in your profile</NavLink>
+                                <NavLink to={`/profile/edit`}><i className="bi bi-pencil-fill"></i> Add address in your profile</NavLink>
                             }
                         </div>
 
@@ -125,10 +138,17 @@ const CartModal = ({totalPrice, modalIsOpen, closeModal, cart}) => {
                         <p><span>With discount: </span>{(totalPrice * (100-discount))/100}₽</p>
                         <p><span>Delivery cost: </span> {DELIVERY_COST}₽</p>
                         <h4 className={CssClasses.PRICE}>Final price: {(totalPrice * (100-discount))/100 + DELIVERY_COST}₽</h4>
-                        <button className={CssClasses.CHECKOUT} onClick={(e) => submitCart(e)}>
-                            Checkout
-                            <i className="bi bi-bag-fill"></i>
-                        </button>
+                        <div className={CssClasses.CENTER}>
+                            <button
+                                className={isValid ?  CssClasses.BTN_VALID: CssClasses.BTN_INVALID}
+                                type="submit"
+                                onClick={(e) => submitCart(e)}
+                            >
+                                Checkout
+                                <i className="bi bi-bag-fill"></i>
+                            </button>
+                        </div>
+
                     </div>
                 </div>
                 :

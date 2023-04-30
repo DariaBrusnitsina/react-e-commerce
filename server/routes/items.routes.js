@@ -1,5 +1,6 @@
 const express = require('express')
 const Items = require('../models/Items')
+const User = require("../models/User");
 const router = express.Router({mergeParams: true})
 
 router.get('/', async (req, res) => {
@@ -13,5 +14,6 @@ router.get('/', async (req, res) => {
         })
     }
 })
+
 
 module.exports = router

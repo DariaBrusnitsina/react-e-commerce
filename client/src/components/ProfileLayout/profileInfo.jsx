@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Link, Navigate, NavLink, useNavigate, useParams} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Navigate, NavLink, useNavigate} from "react-router-dom";
 import ProfileOrderCard from "./profileOrderCard";
 import ProfileOrdersListModal from "./profileOrdersListModal";
 import {useSelector} from "react-redux";
@@ -18,14 +18,14 @@ const CssClasses = {
 }
 
 const ProfileInfo = () => {
-    const user = useSelector(getCurrentUserData());
-    const navigate = useNavigate();
+    const getUser = useSelector(getCurrentUserData());
+    const [user, setUser] = useState(getUser)
     const currentUser = useSelector(getCurrentUserData())
     const status = useSelector(getUsersLoadingStatus())
     const statusData = useSelector(getDataStatus())
-
     const [modalIsOpen, setIsOpen] = useState(false);
     let ordersArray = user ? [...user.orders] : []
+
     if (ordersArray.length > 3 ) {
         ordersArray = ordersArray.slice(0,3)
     }
@@ -40,7 +40,6 @@ const ProfileInfo = () => {
 
     function handleCloseModal() {
         setIsOpen(false);
-
     }
 
     if (user) {
@@ -72,7 +71,7 @@ const ProfileInfo = () => {
                     <div>
                         <div>
                             <h2 className={CssClasses.TITLE}>Your last orders</h2>
-                            { user.orders && user.orders.length !== undefined
+                            {user.orders && user.orders.length !== 0
                                 ? <div>
                                     <ul className={CssClasses.LIST}>
                                         {ordersArray.reverse().map((data) => (
@@ -82,7 +81,7 @@ const ProfileInfo = () => {
                                     </ul>
 
                                 </div>
-                                : <p>You have no orders! Start <Link to="/shop">shopping</Link> now.</p>
+                                : <p>You have no orders! Start <NavLink style={{color: "#81b4e5"}} to="/shop">shopping</NavLink> now.</p>
                             }
                         </div>
                     </div>

@@ -1,23 +1,24 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    getCurrentUserData,
     getIsLoggedIn,
-    getUsersLoadingStatus,
     loadUsersList,
 } from "../store/users";
 import {loadItemsList} from "../store/items";
 import {loadCategoriesList} from "../store/categories";
+import {loadAdminList} from "../store/admin";
 
 const AppLoader = ({ children }) => {
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(getIsLoggedIn());
-    const usersStatusLoading = useSelector(getUsersLoadingStatus());
 
+    dispatch(loadAdminList())
 
     useEffect(() => {
         dispatch(loadItemsList());
         dispatch(loadCategoriesList());
+        dispatch(loadAdminList())
+
         if (isLoggedIn) {
             dispatch(loadUsersList());
         }

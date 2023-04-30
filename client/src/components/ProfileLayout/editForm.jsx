@@ -48,27 +48,23 @@ const EditUserPage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
-    const [data, setData] = useState();
+    const [data, setData] = useState(currentUser);
     const [errors, setErrors] = useState({});
     const [modalIsOpen, setIsOpen] = useState(false);
-
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
         dispatch(updateUserData({...data}));
-        const path = `/${currentUser._id}`
-        navigate(path, { replace: true });
+        navigate("/profile", { replace: true });
     };
 
     useEffect(() => {
-        setData(currentUser)
         if (data && isLoading) {
             setIsLoading(false);
         }
-    }, );
+    },[data]);
 
     const handleChange = (target) => {
         setData((prevState) => ({

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import itemsService from "../services/items.service";
 import isOutdated from "../utils/isOutdated";
 import categoriesService from "../services/categories.service";
 

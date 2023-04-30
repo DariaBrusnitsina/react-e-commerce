@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TextField from "../common/form/textField";
 import CheckBoxField from "../common/form/checkBoxField";
 import {useDispatch, useSelector} from "react-redux";
-import {getIsLoggedIn, signUp} from "../../store/users";
+import {getAuthError, getIsLoggedIn, signUp} from "../../store/users";
 import {Navigate, useNavigate} from "react-router-dom";
 import * as yup from 'yup';
 import ToggleButton from "../common/toggleButton";
@@ -13,13 +13,14 @@ const CssClasses = {
     BTN_VALID: "button-submit",
     BTN_INVALID: "button-submit invalid-form",
     CENTER: "button-wrapper--center",
-    CARD: "auth_page__card"
+    CARD: "auth_page__card",
+    DANGER: "auth_page__text-danger"
 }
 
 const RegisterForm = () => {
     const isLoggedIn = useSelector(getIsLoggedIn())
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const authError = useSelector(getAuthError())
     const [data, setData] = useState({
         name: "",
         surname: "",
@@ -75,8 +76,7 @@ const RegisterForm = () => {
         const isValid = validate();
         if (!isValid) return;
         const newData = {...data};
-        dispatch(signUp(newData));
-        navigate('/shop', {replace: true})
+        dispatch(signUp(newData))
     };
 
     if (isLoggedIn) {
@@ -148,6 +148,7 @@ const RegisterForm = () => {
                 >
                     Submit
                 </button>
+                {authError && <p className={CssClasses.DANGER}>{authError}</p>}
             </div>
         </form>
             <ToggleButton text="Already have an account? " btn="Sign In" to="login"/>

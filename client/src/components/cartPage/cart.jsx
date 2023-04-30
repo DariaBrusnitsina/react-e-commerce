@@ -56,7 +56,6 @@ const Cart = () => {
                                 <button onClick={() => clearCart()} className={CssClasses.CLEAR}>clear cart</button>
                             </div>
                         </div>
-
                     </div>
 
                     <div className={"modal"}>
@@ -65,8 +64,8 @@ const Cart = () => {
                 </>
 
                 : <>
-                    <h1 className={CssClasses.TITLE}>Your cart is empty</h1>
-                    <p className={CssClasses.SUBTITLE}>Navigate to <Link to="/shop">shop</Link> or <Link to="/">home</Link></p>
+                    <h1 className={CssClasses.TITLE}>Your cart is empty!</h1>
+                    <p className={CssClasses.SUBTITLE}>Navigate to <Link style={{color: "#81b4e5"}} to="/shop">shop</Link> or <Link style={{color: "#81b4e5"}} to="/">home</Link></p>
                 </>
             }
 

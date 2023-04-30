@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TextField from "../common/form/textField";
 import { useDispatch, useSelector } from "react-redux";
 import {getAuthError, getIsLoggedIn, login} from "../../store/users";
-import {Navigate, useNavigate} from "react-router-dom";
+import {Navigate, useLocation, useNavigate} from "react-router-dom";
 import * as yup from 'yup';
 import ToggleButton from "../common/toggleButton";
 
@@ -17,9 +17,8 @@ const CssClasses = {
 }
 
 const LoginForm = () => {
-    const navigate = useNavigate()
     const dispatch = useDispatch();
-    const loginError = useSelector(getAuthError());
+    const authError = useSelector(getAuthError());
     const [errors, setErrors] = useState({});
     const [data, setData] = useState({
         email: "",
@@ -61,13 +60,6 @@ const LoginForm = () => {
         const isValid = validate();
         if (!isValid) return;
         dispatch(login({ payload: data }))
-            .then(() => {
-                // navigate("/cart", {replace: true})
-
-        }).catch((err) => {
-            console.log(err)
-        })
-        // navigate(path, {replace: true})
     };
 
     if (isLoggedIn) {
@@ -96,7 +88,7 @@ const LoginForm = () => {
                 error={errors.password}
             />
 
-            {loginError && <p className={CssClasses.DANGER}>{loginError}</p>}
+            {authError && <p className={CssClasses.DANGER}>{authError}</p>}
                 <div className={CssClasses.CENTER}>
                     <button
                         className={isValid ?  CssClasses.BTN_VALID: CssClasses.BTN_INVALID}

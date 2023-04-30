@@ -10,14 +10,13 @@ import { CartProvider } from './hooks/useCart';
 import AppLoader from "./hoc/appLoader";
 import LogOut from "./components/AuthLayout/logOut";
 import Footer from "./components/common/footer";
-import ProfilePage from "./components/ProfileLayout/profilePage";
 import ItemPage from "./components/ShopLayout/itemPage";
 import ShopPage from "./components/ShopLayout/shopPage";
 import RegisterForm from "./components/AuthLayout/registerForm";
 import LoginForm from "./components/AuthLayout/loginForm";
 import ProfileInfo from "./components/ProfileLayout/profileInfo";
 import ProfileEdit from "./components/ProfileLayout/editForm";
-
+import AdminLayout from "./components/layouts/adminLayout";
 
 function App() {
   return (
@@ -31,6 +30,7 @@ function App() {
                 <Route path="about" element={<About />}/>
                 <Route path="/contact" element={<Contact />}/>
                 <Route path="/cart" element={<Cart />}/>
+                <Route path="/admin" element={<AdminLayout />}/>
 
                 <Route path="shop">
                     <Route index element={<ShopPage />}/>
@@ -43,7 +43,6 @@ function App() {
                     <Route path="login" element={<LoginForm />}/>
                     <Route path="logout" element={<LogOut />} />
                     <Route path="*" element={<Navigate to="/auth/login"/>}/>
-
                 </Route>
 
                 <Route path="profile" >
