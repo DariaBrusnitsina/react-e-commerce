@@ -2,6 +2,10 @@ import React, {useEffect, useState} from "react";
 import Modal from 'react-modal';
 import TextField from "./common/form/textField";
 import * as yup from "yup";
+import {updateUserData} from "../store/users";
+import {updateItem, updateItemData} from "../store/items";
+import {useDispatch} from "react-redux";
+import {updateCategory} from "../store/categories";
 
 const CssClasses = {
     AUTH: "auth_page",
@@ -34,7 +38,7 @@ const AdminModal = ({modalIsOpen, closeModal, item}) => {
     const productData = ["name", "url", "category", "description", "price"]
     const [data, setData] = useState(item);
     const [errors, setErrors] = useState({});
-
+    const dispatch = useDispatch()
 
     const handleChange = (target) => {
         setData((prevState) => ({
@@ -88,13 +92,25 @@ const AdminModal = ({modalIsOpen, closeModal, item}) => {
 
     const isValid = Object.keys(errors).length === 0;
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const isValid = validate();
+        if (!isValid) return;
+        if (isProduct) {
+            dispatch(updateItem(data))
+        } else {
+            dispatch(updateCategory(data))
+        }
+        handleCloseModal()
+    };
+
     return (
             <Modal isOpen={modalIsOpen}
                    onRequestClose={closeModal}
                    style={customStyles}
             >
                 <h1 style={{fontSize: "40px"}}>Edit</h1>
-                <form>
+                <form onSubmit={handleSubmit}>
                     {isProduct ? productData.map((p) => {
                         return <TextField
                             label={p}
@@ -117,7 +133,7 @@ const AdminModal = ({modalIsOpen, closeModal, item}) => {
 
                     <button
                         type="submit"
-                        className={isValid ?  CssClasses.BTN_VALID: CssClasses.BTN_INVALID}
+                        className={isValid ? CssClasses.BTN_VALID: CssClasses.BTN_INVALID}
                     >
                         Save
                     </button>

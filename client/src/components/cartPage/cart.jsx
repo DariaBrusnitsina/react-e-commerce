@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CartItem from "../common/itemCard";
 import { useCart } from "../../hooks/useCart";
-import {getCurrentUserData, updateUserData} from "../../store/users";
-import {useDispatch, useSelector} from "react-redux";
 import CartModal from "./cartModal";
+import ItemCard from "../common/itemCard";
 
 
 const CssClasses = {
@@ -38,7 +36,7 @@ const Cart = () => {
                     <div className={CssClasses.WRAPPER}>
                         <div>
                             {cart.map((data) => (
-                                <CartItem data={data} size="large"/>
+                                <ItemCard key={data.item._id} data={data} size="large"/>
                             ))}
                         </div>
 

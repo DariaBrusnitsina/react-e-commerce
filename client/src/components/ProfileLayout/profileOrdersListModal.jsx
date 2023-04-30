@@ -36,7 +36,7 @@ const ProfileOrdersListModal = ({modalIsOpen, closeModal, orders}) => {
 
             <ul className={CssClasses.LIST}>
                 {orders.map((data) => (
-                    <li><ProfileOrderCard data={data}/></li>
+                    <ProfileOrderCard key={data.id} data={data}/>
                 ))}
             </ul>
         </Modal>

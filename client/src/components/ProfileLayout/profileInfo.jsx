@@ -4,6 +4,7 @@ import ProfileOrderCard from "./profileOrderCard";
 import ProfileOrdersListModal from "./profileOrdersListModal";
 import {useSelector} from "react-redux";
 import {getCurrentUserData, getDataStatus, getUsersLoadingStatus} from "../../store/users";
+import getRandomInt from "../../utils/getRandom";
 
 const CssClasses = {
     PROFILE: "profile",
@@ -75,7 +76,7 @@ const ProfileInfo = () => {
                                 ? <div>
                                     <ul className={CssClasses.LIST}>
                                         {ordersArray.reverse().map((data) => (
-                                            <li><ProfileOrderCard data={data}/></li>
+                                            <ProfileOrderCard key={data.id} data={data}/>
                                         ))}
                                         <li>{user.orders.length > 3 ? <button className={CssClasses.REDIRECT_BTN} onClick={() => handleOpenModal()}>All orders</button> : ""}</li>
                                     </ul>

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import isOutdated from "../utils/isOutdated";
 import categoriesService from "../services/categories.service";
+import itemsService from "../services/items.service";
 
 const categoriesSlice = createSlice({
     name: "categories",
@@ -22,23 +23,69 @@ const categoriesSlice = createSlice({
         categoriesRequestFiled: (state, action) => {
             state.error = action.payload;
             state.isLoading = false;
-        }
+        },
+        categoryUpdateRequest: (state) => {},
+        categoryUpdateReceived: (state, action) => {
+            const index = state.entities.findIndex(
+                (i) => i._id === action.payload._id
+            );
+            state.entities[index] = { ...state.entities[index], ...action.payload };
+        },
+        categoryUpdateRequestFailed: (state, action) => {
+            state.error = action.payload;
+        },
+        categoryDeleteRequested: (state) => {},
+        categoryDeleted: (state, action) => {
+            state.entities = state.entities.filter((i) => i._id !== action.payload);
+        },
+        categoryDeleteRequestFailed: (state, action) => {
+            state.error = action.payload;
+        },
     }
 });
 
 const { reducer: categoriesReducer, actions } = categoriesSlice;
-const { categoriesRequested, categoriesReceived, categoriesRequestFiled } = actions;
+const { categoriesRequested,
+    categoriesReceived,
+    categoriesRequestFiled,
+    categoryUpdateRequest,
+    categoryUpdateReceived,
+    categoryUpdateRequestFailed,
+    categoryDeleteRequested,
+    categoryDeleted,
+    categoryDeleteRequestFailed
+    } = actions;
 
 export const loadCategoriesList = () => async (dispatch, getState) => {
     const { lastFetch } = getState().items;
     if (isOutdated(lastFetch)) {
         dispatch(categoriesRequested());
         try {
-            const { content } = await categoriesService.fetchAll();
+            const { content } = await categoriesService.get();
             dispatch(categoriesReceived(content));
         } catch (error) {
             dispatch(categoriesRequestFiled(error.message));
         }
+    }
+};
+
+export const updateCategory = (newData) => async (dispatch) => {
+    dispatch(categoryUpdateRequest());
+    try {
+        const { content } = await categoriesService.patch(newData);
+        dispatch(categoryUpdateReceived(content));
+    } catch (error) {
+        dispatch(categoryUpdateRequestFailed(error.message));
+    }
+};
+
+export const deleteCategory = (id) => async (dispatch) => {
+    dispatch(categoryDeleteRequested());
+    try {
+        await categoriesService.delete(id);
+        dispatch(categoryDeleted(id));
+    } catch (error) {
+        dispatch(categoryDeleteRequestFailed(error.message));
     }
 };
 

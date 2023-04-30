@@ -77,7 +77,7 @@ const CartModal = ({totalPrice, modalIsOpen, closeModal, cart}) => {
         if (payment === null || !currentUser.address.length) return
         const newData = {...currentUser}
         let cartArray = newData.orders
-        newData.orders = [...cartArray, {cart, from, to, payment}]
+        newData.orders = [...cartArray, {id: date, cart, from, to, payment}]
         newData.sale = getDiscount(newData) > 15 ? 15 : getDiscount(newData)
         dispatch(updateUserData(newData))
         clearCart()

@@ -19,7 +19,6 @@ const userService = {
         const { data } = await httpService.get(
             userEndpoint + localStorageService.getUserId()
         );
-        console.log(data)
         return {data};
     },
     update: async (payload) => {
@@ -27,6 +26,7 @@ const userService = {
             userEndpoint + localStorageService.getUserId(),
             payload
         );
+        console.log(data)
         return data;
     },
     removeUser: async (userId) => {

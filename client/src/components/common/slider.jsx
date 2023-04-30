@@ -47,12 +47,11 @@ const Slider = ({ array }) => {
         setIndex(newIndexes)
         setSliders(sliced)
     }
-
     return (
         <div className={CssClasses.SLIDER}>
             <button onClick={handleDecrement}>←</button>
             {sliders.map((item) =>
-                <CategoryCard item={item}/>
+                <CategoryCard key={item._id} item={item}/>
             )}
             <button onClick={handleIncrement}>→</button>
         </div>

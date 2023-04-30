@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createAction, createSlice} from "@reduxjs/toolkit";
 import itemsService from "../services/items.service";
 import isOutdated from "../utils/isOutdated";
+import userService from "../services/user.service";
 
 const itemsSlice = createSlice({
     name: "items",
@@ -22,23 +23,69 @@ const itemsSlice = createSlice({
         itemsRequestFiled: (state, action) => {
             state.error = action.payload;
             state.isLoading = false;
-        }
+        },
+        itemsUpdateRequest: (state) => {},
+        itemsUpdateReceived: (state, action) => {
+            const index = state.entities.findIndex(
+                (i) => i._id === action.payload._id
+            );
+            state.entities[index] = { ...state.entities[index], ...action.payload };
+        },
+        itemsUpdateRequestFailed: (state, action) => {
+            state.error = action.payload;
+        },
+        itemDeleteRequested: (state) => {},
+        itemDeleted: (state, action) => {
+            state.entities = state.entities.filter((i) => i._id !== action.payload);
+            },
+        itemDeleteRequestFailed: (state, action) => {
+            state.error = action.payload;
+            },
     }
 });
 
 const { reducer: itemsReducer, actions } = itemsSlice;
-const { itemsRequested, itemsReceived, itemsRequestFiled } = actions;
+const { itemsRequested,
+    itemsReceived,
+    itemsRequestFiled,
+    itemsUpdateRequest,
+    itemsUpdateReceived,
+    itemsUpdateRequestFailed,
+    itemDeleteRequested,
+    itemDeleted,
+    itemDeleteRequestFailed
+} = actions;
 
 export const loadItemsList = () => async (dispatch, getState) => {
     const { lastFetch } = getState().items;
     if (isOutdated(lastFetch)) {
         dispatch(itemsRequested());
         try {
-            const { content } = await itemsService.fetchAll();
+            const { content } = await itemsService.get();
             dispatch(itemsReceived(content));
         } catch (error) {
             dispatch(itemsRequestFiled(error.message));
         }
+    }
+};
+
+export const updateItem = (newData) => async (dispatch) => {
+    dispatch(itemsUpdateRequest());
+    try {
+        const { content } = await itemsService.patch(newData);
+        dispatch(itemsUpdateReceived(content));
+    } catch (error) {
+        dispatch(itemsUpdateRequestFailed(error.message));
+    }
+};
+
+export const deleteItem = (id) => async (dispatch) => {
+    dispatch(itemDeleteRequested());
+    try {
+        await itemsService.delete(id);
+        dispatch(itemDeleted(id));
+    } catch (error) {
+        dispatch(itemDeleteRequestFailed(error.message));
     }
 };
 

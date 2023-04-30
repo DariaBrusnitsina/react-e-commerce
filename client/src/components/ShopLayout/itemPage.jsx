@@ -26,7 +26,7 @@ const ItemPage = () => {
                         </div>
                         <div className="item-text">
                             <h1>{item.name}</h1>
-                            <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, maxime! Deserunt sint repellendus architecto ipsum laboriosam non. Sit minus, voluptate aliquam in architecto repudiandae, iure maiores iusto facere est doloremque.</h5>
+                            <h5>{item.description}</h5>
                             <div className="item-btn">
                                 <p>{item.price} ₽</p>
                                 <button onClick={() => addCartItem(item)} className="add-cart-btn">Add <i className="bi bi-cart"></i></button>

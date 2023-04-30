@@ -1,11 +1,10 @@
 import React, {useState} from "react";
-import {useCart} from "../../hooks/useCart";
-import {useSelector} from "react-redux";
-import {getCurrentUserData, getIsLoggedIn} from "../../store/users";
+import {useDispatch, useSelector} from "react-redux";
+import {getCurrentUserData} from "../../store/users";
 import {getAdmins} from "../../store/admin";
 import {Navigate} from "react-router-dom";
-import {getItems} from "../../store/items";
-import {getCategories} from "../../store/categories";
+import {deleteItem, getItems} from "../../store/items";
+import {deleteCategory, getCategories} from "../../store/categories";
 import AdminModal from "../adminModal";
 
 const CssClasses = {
@@ -19,6 +18,7 @@ const Admin = () => {
     const currentUser = useSelector(getCurrentUserData());
     const admins = useSelector(getAdmins());
     const items = useSelector(getItems());
+    const dispatch = useDispatch()
     const categories = useSelector(getCategories());
     const [modalIsOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState()
@@ -36,12 +36,19 @@ const Admin = () => {
     function handleOpenModal(item) {
         setIsOpen(true);
         setSelected(item)
-        console.log(item)
     }
 
     function handleCloseModal() {
         setSelected(null)
         setIsOpen(false);
+    }
+
+    function handleDelete(object) {
+        if (object.price) {
+            dispatch(deleteItem(object._id))
+        } else {
+            dispatch(deleteCategory(object._id))
+        }
     }
 
     return (
@@ -52,11 +59,12 @@ const Admin = () => {
                     <h1 className="title">Products list</h1>
                     <p className="">Totally {items.length} items</p>
                     <ul>
-                        {items.map((i, index) => <li>
-                                <p>{index+1}. {i.name} </p>
-                                <button onClick={() => handleOpenModal(i)}><i className="bi bi-pencil-square"></i></button>
-                                <button><i className="bi bi-trash"></i></button>
-                        </li>
+                        {items.map((i, index) =>
+                                <li key={i._id}>
+                                    <p>{index+1}. {i.name} </p>
+                                    <button onClick={() => handleOpenModal(i)}><i className="bi bi-pencil-square"></i></button>
+                                    <button onClick={() => handleDelete(i)}><i className="bi bi-trash"></i></button>
+                                </li>
                         )}
                         <button><i className="bi bi-plus-lg"></i> Add new product</button>
                     </ul>
@@ -66,10 +74,10 @@ const Admin = () => {
                     <h1 className="title">Categories list</h1>
                      <p className="">Totally {categories.length} items</p>
                      <ul>
-                         {categories.map((c, index) => <li>
+                         {categories.map((c, index) => <li key={c._id}>
                              <p>{index+1}. {c.name} </p>
                              <button onClick={() => handleOpenModal(c)}><i className="bi bi-pencil-square"></i></button>
-                             <button><i className="bi bi-trash"></i></button>
+                             <button onClick={() => handleDelete(c)}><i className="bi bi-trash"></i></button>
                          </li>
                         )}
                          <button><i className="bi bi-plus-lg"></i> Add new category</button>
@@ -78,11 +86,7 @@ const Admin = () => {
                  </div>
             </div>
             {selected && <AdminModal item={selected} closeModal={handleCloseModal} modalIsOpen={modalIsOpen}/>}
-
         </div>
-
-
-
     );
 };
 
