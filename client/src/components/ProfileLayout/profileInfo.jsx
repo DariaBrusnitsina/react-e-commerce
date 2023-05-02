@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 import {Navigate, NavLink, useNavigate} from "react-router-dom";
 import ProfileOrderCard from "./profileOrderCard";
 import ProfileOrdersListModal from "./profileOrdersListModal";
-import {useSelector} from "react-redux";
-import {getCurrentUserData, getDataStatus, getUsersLoadingStatus} from "../../store/users";
+import {useDispatch, useSelector} from "react-redux";
+import {getCurrentUserData, getDataStatus, getUsersLoadingStatus, loadUsersList} from "../../store/users";
 import getRandomInt from "../../utils/getRandom";
 
 const CssClasses = {
@@ -19,20 +19,28 @@ const CssClasses = {
 }
 
 const ProfileInfo = () => {
-    const getUser = useSelector(getCurrentUserData());
-    const [user, setUser] = useState(getUser)
-    const currentUser = useSelector(getCurrentUserData())
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadUsersList())
+    },[])
+
+    // dispatch(loadUsersList())
+    const user = useSelector(getCurrentUserData())
     const status = useSelector(getUsersLoadingStatus())
     const statusData = useSelector(getDataStatus())
+
     const [modalIsOpen, setIsOpen] = useState(false);
+
+
+    if (!user && !statusData && !status ) {
+        return <Navigate to="/" />
+    }
+
     let ordersArray = user ? [...user.orders] : []
 
     if (ordersArray.length > 3 ) {
         ordersArray = ordersArray.slice(0,3)
-    }
-
-    if (!currentUser && !statusData && !status ) {
-        return <Navigate to="/" />
     }
 
     function handleOpenModal() {

@@ -18,9 +18,9 @@ function NavProfile() {
     const dispatch = useDispatch();
     let isAdmin
 
-    if (currentUser) {
+    if (admins && currentUser) {
         let result = admins.find((a) => a.email === currentUser.email);
-        isAdmin = result ? true : false
+        isAdmin = !!result
     }
 
     if (token === "undefined") {

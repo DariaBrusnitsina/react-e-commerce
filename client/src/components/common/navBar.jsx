@@ -20,9 +20,9 @@ const NavBar = () => {
     const admins = useSelector(getAdmins());
     let isAdmin
 
-    if (currentUser) {
+    if (admins && currentUser) {
         let result = admins.find((a) => a.email === currentUser.email);
-        isAdmin = result ? true : false
+        isAdmin = !!result
     }
 
     return (

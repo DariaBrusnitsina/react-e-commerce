@@ -41,6 +41,16 @@ const categoriesSlice = createSlice({
         categoryDeleteRequestFailed: (state, action) => {
             state.error = action.payload;
         },
+        categoryCreateRequested: (state) => {},
+        categoryCreateReceived: (state, action) => {
+            if (!Array.isArray(state.entities)) {
+                state.entities = [];
+            }
+            state.entities.push(action.payload);
+        },
+        categoryCreateRequestFailed: (state, action) => {
+            state.error = action.payload;
+        }
     }
 });
 
@@ -53,7 +63,10 @@ const { categoriesRequested,
     categoryUpdateRequestFailed,
     categoryDeleteRequested,
     categoryDeleted,
-    categoryDeleteRequestFailed
+    categoryDeleteRequestFailed,
+    categoryCreateRequested,
+    categoryCreateReceived,
+    categoryCreateRequestFailed
     } = actions;
 
 export const loadCategoriesList = () => async (dispatch, getState) => {
@@ -66,6 +79,16 @@ export const loadCategoriesList = () => async (dispatch, getState) => {
         } catch (error) {
             dispatch(categoriesRequestFiled(error.message));
         }
+    }
+};
+
+export const addCategory = (newData) => async (dispatch) => {
+    dispatch(categoryCreateRequested());
+    try {
+        const { content } = await categoriesService.post(newData);
+        dispatch(categoryCreateReceived(content));
+    } catch (error) {
+        dispatch(categoryCreateRequestFailed(error.message));
     }
 };
 

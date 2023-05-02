@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     getCurrentUserData, getDataStatus,
     getUserById,
-    getUsersLoadingStatus,
+    getUsersLoadingStatus, loadUsersList,
     logOut,
     removeUser,
     updateUserData
@@ -49,6 +49,11 @@ const EditUserPage = () => {
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState(currentUser);
+
+    useEffect(() => {
+        setData(currentUser)
+    },[currentUser]);
+
     const [errors, setErrors] = useState({});
     const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -57,6 +62,7 @@ const EditUserPage = () => {
         const isValid = validate();
         if (!isValid) return;
         dispatch(updateUserData({...data}));
+        dispatch(loadUsersList())
         navigate("/profile", { replace: true });
     };
 
@@ -101,20 +107,6 @@ const EditUserPage = () => {
 
     const isValid = Object.keys(errors).length === 0;
 
-    const handleDelete = async (e) => {
-        e.preventDefault();
-        dispatch(removeUser(currentUser._id));
-        dispatch(logOut());
-        const path = `/`
-        navigate(path, { replace: true });
-
-        // const isValid = validate();
-        // if (!isValid) return;
-        // dispatch(updateUserData({...data}));
-        // const path = `/${currentUser._id}`
-        // navigate(path, { replace: true });
-    };
-
     function openModal() {
         setIsOpen(true);
     }
@@ -127,84 +119,85 @@ const EditUserPage = () => {
         return <Navigate to="/" />
     }
 
-    return (
-        <div className={CssClasses.AUTH}>
-        <div className={CssClasses.CARD}>
-            <h1 className={CssClasses.TITLE}>Edit Profile</h1>
-            {!isLoading
-                ? (
+    if (currentUser) {
+        return (
+            <div className={CssClasses.AUTH}>
+            <div className={CssClasses.CARD}>
+                <h1 className={CssClasses.TITLE}>Edit Profile</h1>
+                {!status
+                    ? (
+                        <div>
+                            <form onSubmit={handleSubmit}>
+                                <TextField
+                                    label="Name"
+                                    name="name"
+                                    value={data.name}
+                                    onChange={handleChange}
+                                    error={errors.name}
+                                />
+                                <TextField
+                                    label="Surname"
+                                    name="surname"
+                                    value={data.surname}
+                                    onChange={handleChange}
+                                    error={errors.surname}
+                                />
+                                <TextField
+                                    label="Email"
+                                    name="email"
+                                    value={data.email}
+                                    onChange={handleChange}
+                                    error={errors.email}
+                                />
+                                <TextField
+                                    label="Phone"
+                                    name="phone"
+                                    value={data.phone}
+                                    onChange={handleChange}
+                                    error={errors.phone}
+                                />
+                                <TextField
+                                    label="Address"
+                                    name="address"
+                                    value={data.address}
+                                    onChange={handleChange}
+                                    error={errors.address}
+                                />
+                                <button
+                                    type="submit"
+                                    className={isValid ?  CssClasses.BTN_VALID: CssClasses.BTN_INVALID}
+                                >
+                                    Save
+                                </button>
+                            </form>
+                            <button onClick={() => openModal()} style={{color: "#CA646FFF"} }>Delete Profile</button>
+                        </div>
+
+
+                    )
+                    : (
+                        <div style={{textAlign: "center"}}>
+                            <ClipLoader color="#000000" size={20} cssOverride={override}/>
+                        </div>
+                    )}
+                <Modal
+                    isOpen={modalIsOpen}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                >
                     <div>
-                        <form onSubmit={handleSubmit}>
-                            <TextField
-                                label="Name"
-                                name="name"
-                                value={data.name}
-                                onChange={handleChange}
-                                error={errors.name}
-                            />
-                            <TextField
-                                label="Surname"
-                                name="surname"
-                                value={data.surname}
-                                onChange={handleChange}
-                                error={errors.surname}
-                            />
-                            <TextField
-                                label="Email"
-                                name="email"
-                                value={data.email}
-                                onChange={handleChange}
-                                error={errors.email}
-                            />
-                            <TextField
-                                label="Phone"
-                                name="phone"
-                                value={data.phone}
-                                onChange={handleChange}
-                                error={errors.phone}
-                            />
-                            <TextField
-                                label="Address"
-                                name="address"
-                                value={data.address}
-                                onChange={handleChange}
-                                error={errors.address}
-                            />
-                            <button
-                                type="submit"
-                                className={isValid ?  CssClasses.BTN_VALID: CssClasses.BTN_INVALID}
-                            >
-                                Save
-                            </button>
-                        </form>
-                        <button onClick={() => openModal()} style={{color: "#CA646FFF"} }>Delete Profile</button>
+                        <p className={CssClasses.SUBTITLE}>{EditPageTexts.MODAL_TITLE}</p>
+                        <p>{EditPageTexts.MODAL_SUBTITLE}</p>
+                        <div className={CssClasses.DELITE_BTNS}>
+                            <button onClick={() => closeModal()}>{EditPageTexts.MODAL_NO_BTN}</button>
+                        </div>
                     </div>
 
-
-                )
-                : (
-                    <div style={{textAlign: "center"}}>
-                        <ClipLoader color="#000000" size={20} cssOverride={override}/>
-                    </div>
-                )}
-            <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-                style={customStyles}
-            >
-                <div>
-                    <p className={CssClasses.SUBTITLE}>{EditPageTexts.MODAL_TITLE}</p>
-                    <p>{EditPageTexts.MODAL_SUBTITLE}</p>
-                    <div className={CssClasses.DELITE_BTNS}>
-                        <button style={{color: "#CA646FFF"}} onClick={(e) => handleDelete(e)}>{EditPageTexts.MODAL_YES_BTN}</button>
-                        <button onClick={() => closeModal()}>{EditPageTexts.MODAL_NO_BTN}</button>
-                    </div>
-                </div>
-
-            </Modal>
-        </div>
-        </div>
-    );
+                </Modal>
+            </div>
+            </div>
+        )
+    }
 };
 
 export default EditUserPage;

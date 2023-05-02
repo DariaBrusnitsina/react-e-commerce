@@ -32,6 +32,17 @@ export const CartProvider = ({children}) => {
         return price
     }
 
+    function getTotalPrice() {
+        let price = 0
+        const local = localStorage.getItem("cart")
+        const cartSet = JSON.parse(local)
+
+        for (let i = 0; i < cartSet.length; i++) {
+            price = price + (cartSet[i].item.price * cartSet[i].counter)
+        }
+        return price
+    }
+
     useEffect(() => {
         const cartValue = localStorage.getItem("cart")
         if (cartValue) {
@@ -56,13 +67,16 @@ export const CartProvider = ({children}) => {
                     num = i
                 }
             }
+
             if (counter === 0) {
                 const cartData = {'item': data, 'counter': 1 }
                 cartSet.push(cartData)
                 localStorage.setItem("cart", JSON.stringify(cartSet))
+                setCart(cartSet)
             } else {
                 cartSet[num].counter++
                 localStorage.setItem("cart", JSON.stringify(cartSet))
+                setCart(cartSet)
             }
         } else {
             let local = []
@@ -91,6 +105,7 @@ export const CartProvider = ({children}) => {
         localStorage.setItem("cart", JSON.stringify(cartSet))
         setCartLength(getCartLength())
         setTotalPrice(getTotalPrice())
+        setCart(cartSet)
     }
 
     const decrementItem = (data) => {
@@ -112,6 +127,7 @@ export const CartProvider = ({children}) => {
         localStorage.setItem("cart", JSON.stringify(cartSet))
         setCartLength(getCartLength())
         setTotalPrice(getTotalPrice())
+        setCart(cartSet)
     }
 
     const removeCartItem = (data) => {

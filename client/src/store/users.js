@@ -2,9 +2,7 @@ import { createAction, createSlice } from "@reduxjs/toolkit";
 import userService from "../services/user.service";
 import authService from "../services/auth.service";
 import localStorageService from "../services/localStorage.service";
-import history from "../utils/history";
 import generateAuthError from "../utils/generateAuthError";
-import {useNavigate} from "react-router-dom";
 
 const initialState = localStorageService.getAccessToken()
     ? {
@@ -126,7 +124,6 @@ export const signUp = (payload) =>
 
             } catch (error) {
                 const { code, message } = error.response.data.error;
-                console.log(message)
                 if (code === 400) {
                     const errorMessage = generateAuthError(message);
                     dispatch(authRequestFailed(errorMessage));

@@ -5,7 +5,7 @@ import ProductCard from "../common/productCard";
 import Pagination from "../common/pagination";
 import CategoriesList from "./categoriesList";
 import SortButton from "./sortButton";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {getItems} from "../../store/items";
 import {getCategories} from "../../store/categories";
 import SkeletonShop from "../skeleton/skeletonShop";
@@ -80,6 +80,7 @@ const ShopPage = () => {
 
                 <div className="shop__section">
                     {categories && (
+                        <div>
                             <div className="shop__categories">
                                 <CategoriesList
                                     selectedItem={selectedCategory}
@@ -94,6 +95,7 @@ const ShopPage = () => {
                                     reset filter
                                 </button>
                             </div>
+                        </div>
                     )}
                     <div className="shop__items">
                         <div className="shop__items--bar">

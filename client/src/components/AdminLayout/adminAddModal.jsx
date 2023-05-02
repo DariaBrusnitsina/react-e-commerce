@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
 import Modal from 'react-modal';
-import TextField from "./common/form/textField";
+import TextField from "../common/form/textField";
 import * as yup from "yup";
-import {updateUserData} from "../store/users";
-import {updateItem, updateItemData} from "../store/items";
+import {addItem} from "../../store/items";
 import {useDispatch} from "react-redux";
-import {updateCategory} from "../store/categories";
+import {addCategory} from "../../store/categories";
 
 const CssClasses = {
     AUTH: "auth_page",
@@ -32,13 +31,25 @@ const customStyles = {
     },
 };
 
-const AdminModal = ({modalIsOpen, closeModal, item}) => {
-    const isProduct = item.price ? true : false
-    const categoryData = ["id", "name", "url"]
-    const productData = ["name", "url", "category", "description", "price"]
-    const [data, setData] = useState(item);
-    const [errors, setErrors] = useState({});
+const AdminAddModal = ({modalIsOpen, closeModal, item}) => {
     const dispatch = useDispatch()
+    const productData = ["name", "url", "category", "description", "price"]
+    const categoryData = ["id", "name", "url"]
+    const isProduct = item === "product"
+    const productConfig = {
+        name: "",
+        url: "",
+        category: "",
+        description: "",
+        price: 0
+    }
+    const categoryConfig = {
+        id: "",
+        name: "",
+        url: ""
+    }
+    const [data, setData] = useState( isProduct ? productConfig : categoryConfig);
+    const [errors, setErrors] = useState({});
 
     const handleChange = (target) => {
         setData((prevState) => ({
@@ -46,9 +57,11 @@ const AdminModal = ({modalIsOpen, closeModal, item}) => {
             [target.name]: target.value
         }));
     };
+
     function handleCloseModal() {
         closeModal(false)
         setErrors(null)
+        setData(null)
     }
 
     const validateSchemeProduct = yup.object().shape({
@@ -56,7 +69,7 @@ const AdminModal = ({modalIsOpen, closeModal, item}) => {
         description: yup.string()
             .required("Please add description"),
         category: yup.string()
-            .required("Please add category id"),
+            .required("Please add an id of one of the categories"),
         url: yup.string()
             .required("Please add url"),
         name: yup.string()
@@ -74,9 +87,9 @@ const AdminModal = ({modalIsOpen, closeModal, item}) => {
 
     const validate = () => {
         isProduct ?  validateSchemeProduct
-            .validate(data)
-            .then(() => setErrors({}))
-            .catch((err) => setErrors({[err.path]: err.message}))
+                .validate(data)
+                .then(() => setErrors({}))
+                .catch((err) => setErrors({[err.path]: err.message}))
             : validateSchemeCategories
                 .validate(data)
                 .then(() => setErrors({}))
@@ -97,56 +110,53 @@ const AdminModal = ({modalIsOpen, closeModal, item}) => {
         const isValid = validate();
         if (!isValid) return;
         if (isProduct) {
-            dispatch(updateItem(data))
+            dispatch(addItem(data))
         } else {
-            dispatch(updateCategory(data))
+            dispatch(addCategory(data))
         }
         handleCloseModal()
     };
 
     return (
-            <Modal isOpen={modalIsOpen}
-                   onRequestClose={closeModal}
-                   style={customStyles}
-            >
-                <h1 style={{fontSize: "40px"}}>Edit</h1>
-                <form onSubmit={handleSubmit}>
-                    {isProduct ? productData.map((p) => {
-                        return <TextField
-                            label={p}
-                            name={p}
-                            value={data[p]}
-                            onChange={handleChange}
-                            error={errors[p]}
-                        />
-                    }) : categoryData.map((p) => {
-                        return <TextField
-                            label={p}
-                            name={p}
-                            value={data[p]}
-                            onChange={handleChange}
-                            error={errors[p]}
-                        />
-                    })
+        <Modal isOpen={modalIsOpen}
+               onRequestClose={closeModal}
+               style={customStyles}
+        >
+            <h1 style={{fontSize: "40px"}}>Add {item}</h1>
 
-                    }
+            <form onSubmit={handleSubmit}>
+                {isProduct ? productData.map((p) => {
+                    return <TextField
+                        label={p}
+                        name={p}
+                        value={data[p]}
+                        onChange={handleChange}
+                        error={errors[p]}
+                    />
+                }) : categoryData.map((p) => {
+                    return <TextField
+                        label={p}
+                        name={p}
+                        value={data[p]}
+                        onChange={handleChange}
+                        error={errors[p]}
+                    />
+                })
 
-                    <button
-                        type="submit"
-                        className={isValid ? CssClasses.BTN_VALID: CssClasses.BTN_INVALID}
-                    >
-                        Save
-                    </button>
-                    </form>
+                }
 
-
-                {/*<p>{item.name}</p>*/}
-                {/*{item.id && <p>{item.id}</p>}*/}
-            </Modal>
+                <button
+                    type="submit"
+                    className={isValid ? CssClasses.BTN_VALID: CssClasses.BTN_INVALID}
+                >
+                    Save
+                </button>
+            </form>
+        </Modal>
 
 
 
     );
 };
 
-export default AdminModal;
+export default AdminAddModal;

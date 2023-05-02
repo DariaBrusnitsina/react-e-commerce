@@ -19,6 +19,11 @@ const CssClasses = {
 const Cart = () => {
     const {cart, clearCart, cartLength, totalPrice} = useCart()
     const [modalIsOpen, setIsOpen] = useState(false);
+    // const cartValue = localStorage.getItem("cart")
+
+    // useEffect(() => {
+    //     updateCart()
+    // }, []);
 
     function handleOpenModal() {
         setIsOpen(true);

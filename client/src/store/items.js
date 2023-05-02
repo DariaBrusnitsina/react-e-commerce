@@ -1,7 +1,6 @@
-import {createAction, createSlice} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 import itemsService from "../services/items.service";
 import isOutdated from "../utils/isOutdated";
-import userService from "../services/user.service";
 
 const itemsSlice = createSlice({
     name: "items",
@@ -29,18 +28,28 @@ const itemsSlice = createSlice({
             const index = state.entities.findIndex(
                 (i) => i._id === action.payload._id
             );
-            state.entities[index] = { ...state.entities[index], ...action.payload };
+            state.entities[index] = { ...state.entities[index], ...action.payload }
         },
         itemsUpdateRequestFailed: (state, action) => {
             state.error = action.payload;
         },
         itemDeleteRequested: (state) => {},
         itemDeleted: (state, action) => {
-            state.entities = state.entities.filter((i) => i._id !== action.payload);
-            },
+            state.entities = state.entities.filter((i) => i._id !== action.payload)
+        },
         itemDeleteRequestFailed: (state, action) => {
-            state.error = action.payload;
-            },
+            state.error = action.payload
+        },
+        itemCreateRequested: (state) => {},
+        itemCreateReceived: (state, action) => {
+            if (!Array.isArray(state.entities)) {
+                state.entities = [];
+            }
+            state.entities.push(action.payload)
+        },
+        itemCreateRequestFailed: (state, action) => {
+            state.error = action.payload
+        }
     }
 });
 
@@ -53,7 +62,10 @@ const { itemsRequested,
     itemsUpdateRequestFailed,
     itemDeleteRequested,
     itemDeleted,
-    itemDeleteRequestFailed
+    itemDeleteRequestFailed,
+    itemCreateRequested,
+    itemCreateReceived,
+    itemCreateRequestFailed
 } = actions;
 
 export const loadItemsList = () => async (dispatch, getState) => {
@@ -66,6 +78,16 @@ export const loadItemsList = () => async (dispatch, getState) => {
         } catch (error) {
             dispatch(itemsRequestFiled(error.message));
         }
+    }
+};
+
+export const addItem = (newData) => async (dispatch) => {
+    dispatch(itemCreateRequested());
+    try {
+        const { content } = await itemsService.post(newData);
+        dispatch(itemCreateReceived(content));
+    } catch (error) {
+        dispatch(itemCreateRequestFailed(error.message));
     }
 };
 
@@ -94,26 +116,9 @@ export const getItemsLoadingStatus = () => (state) =>
     state.items.isLoading;
 
 export const getItemById = (itemId) => (state) => {
-    console.log(state.items)
     if (state.items.entities) {
         return state.items.entities.find((u) => u._id === itemId);
     }
-};
-
-export const getItemsByIds = (itemsIds) => (state) => {
-    if (state.items.entities) {
-        const itemsArray = [];
-        for (const itemId of itemsIds) {
-            for (const item of state.items.entities) {
-                if (item._id === itemId) {
-                    itemsArray.push(item);
-                    break;
-                }
-            }
-        }
-        return itemsArray;
-    }
-    return [];
 };
 
 export default itemsReducer;

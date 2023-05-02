@@ -61,16 +61,12 @@ const CartModal = ({totalPrice, modalIsOpen, closeModal, cart}) => {
         setPayment(target.value)
     }
 
-    if (!currentUser.address.length || payment === null) {
-        isValid = false
-    }
-
-    useEffect(() => {
+    if (currentUser) {
         if (!currentUser.address.length || payment === null) {
             isValid = false
         }
-    }, [payment, currentUser.address.length]);
 
+    }
 
     const submitCart = async (e) => {
         e.preventDefault();

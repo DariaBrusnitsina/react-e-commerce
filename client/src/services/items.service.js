@@ -18,5 +18,9 @@ const itemsService = {
         const { data } = await httpService.delete(itemsEndpoint + id);
         return data;
     },
+    post: async (newData) => {
+    const { data } = await httpService.post(itemsEndpoint, newData);
+    return data;
+    }
 };
 export default itemsService;
