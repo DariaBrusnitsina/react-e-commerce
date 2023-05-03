@@ -44,7 +44,7 @@ const RegisterForm = () => {
     const validateScheme = yup.object().shape({
         licence: yup.boolean().oneOf([true],'Please agree with Terms of Service'),
         password: yup.string()
-            .required("Please enter password"),
+            .required("Please enter password").min(8),
         phone: yup.string().matches(phoneRegExp, 'Phone number is not valid')
             .required("Please enter phone number")
             .min(11),
